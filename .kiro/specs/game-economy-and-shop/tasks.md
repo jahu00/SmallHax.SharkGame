@@ -47,40 +47,40 @@ This plan implements the full game economy system for SharkGame: coin earning, p
     - **Property 2: Bonus Coin Calculation** — For any remaining tiles and bonus points, correct bonus coins are calculated based on threshold
     - **Validates: Requirements 1.1, 2.1, 2.3**
 
-- [ ] 3. Checkpoint - Ensure persistence and coin systems work
+- [x] 3. Checkpoint - Ensure persistence and coin systems work
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 4. Code quality improvements and input leak fix
-  - [ ] 4.1 Modernize Global.gd signal syntax
+- [x] 4. Code quality improvements and input leak fix
+  - [x] 4.1 Modernize Global.gd signal syntax
     - Replace `emit_signal("signal_name")` with `signal_name.emit()` for all signals
     - Add `coins_changed` and `inventory_changed` signals if needed for UI reactivity
     - _Requirements: 11.4_
 
-  - [ ] 4.2 Fix Main.gd scene transitions with deferred instantiation
+  - [x] 4.2 Fix Main.gd scene transitions with deferred instantiation
     - Replace `Callable(self, "method_name")` connections with direct reference syntax (`signal.connect(method)`)
     - In `on_scene_changing()`: call `clear_scene()` to remove old scene immediately, then `await get_tree().process_frame` before instantiating the new scene
     - Add Shop and SpinningWheel to the match statement
     - _Requirements: 10.5, 10.6, 11.3_
 
-  - [ ] 4.3 Update Scenes.gd with new scene preloads
+  - [x] 4.3 Update Scenes.gd with new scene preloads
     - Add `Shop` and `SpinningWheel` to `SceneEnum`
     - Add `var Shop = preload("res://Shop.tscn")` and `var SpinningWheel = preload("res://SpinningWheel.tscn")`
     - _Requirements: 4.6, 9.1_
 
-  - [ ] 4.4 Refactor Menu.gd to use pressed signals and proper buttons
+  - [x] 4.4 Refactor Menu.gd to use pressed signals and proper buttons
     - Replace `gui_input` connections with `pressed` signal connections for NewGameButton, ContinueButton, ExitButton
     - Use direct reference signal syntax (`button.pressed.connect(method)`)
     - Add Shop button and SpinningWheel button with `pressed` signal connections
     - Display current coin balance on the menu
     - _Requirements: 10.2, 11.1, 11.3, 11.5, 4.6, 9.1_
 
-  - [ ] 4.5 Refactor Game.gd menu button and game over to use pressed signals
+  - [x] 4.5 Refactor Game.gd menu button and game over to use pressed signals
     - Replace `gui_input` connection on menu_button with `pressed` signal; only allow transition when state == "PlayerMove"
     - Replace game_over_container `gui_input` with a child Button node using `pressed` signal (or use `accept_event()` in `_gui_input`)
     - Use direct reference signal syntax throughout
     - _Requirements: 10.1, 10.3, 10.4, 11.2, 11.3, 11.6_
 
-- [ ] 5. Checkpoint - Ensure code quality and input leak fixes work
+- [x] 5. Checkpoint - Ensure code quality and input leak fixes work
   - Ensure all tests pass, ask the user if questions arise.
 
 - [ ] 6. Shop implementation

@@ -4,16 +4,18 @@ signal scene_changing
 signal game_closing
 signal game_ending
 signal game_starting
+signal coins_changed
+signal inventory_changed
 
 func new_game():
 	GameStore.new_game()
-	emit_signal("game_starting")
+	game_starting.emit()
 
 func change_scene_to_file(target_scene):
-	emit_signal("scene_changing", target_scene)
+	scene_changing.emit(target_scene)
 
 func close_game():
-	emit_signal("game_closing")
+	game_closing.emit()
 
 func end_game():
-	emit_signal("game_ending")
+	game_ending.emit()

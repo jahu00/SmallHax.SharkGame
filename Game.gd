@@ -16,8 +16,8 @@ var tile_move_speed = 750
 var state = "PlayerMove"
 
 func _ready():
-	game_over_container.connect("gui_input", Callable(self, "on_game_over_container_input"))
-	menu_button.connect("gui_input", Callable(self, "on_menu_button_input"))
+	game_over_container.gui_input.connect(on_game_over_container_input)
+	menu_button.pressed.connect(on_menu_button_pressed)
 	init()
 
 func init():
@@ -34,8 +34,8 @@ func populate_board():
 	for tile_data in GameStore.data.tiles:
 		var tile = Scenes.Tile.instantiate()
 		tile.init(tile_data)
-		tile.connect("clicked", Callable(self, "on_tile_clicked"))
-		tile.connect("destroyed", Callable(self, "on_tile_destroyed"))
+		tile.clicked.connect(on_tile_clicked)
+		tile.destroyed.connect(on_tile_destroyed)
 		tile_layer.add_child(tile)
 		
 
@@ -298,8 +298,9 @@ func can_advance():
 
 func on_game_over_container_input(event):
 	if event is InputEventMouseButton or event is InputEventScreenTouch:
+		game_over_container.accept_event()
 		Global.end_game()
 
-func on_menu_button_input(event):
-	if (event is InputEventMouseButton or event is InputEventScreenTouch) and state == "PlayerMove":
+func on_menu_button_pressed():
+	if state == "PlayerMove":
 		Global.change_scene_to_file(Scenes.SceneEnum.Menu)

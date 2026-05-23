@@ -193,18 +193,13 @@ offset_bottom = 1280.0
 offset_right = 720.0
 offset_bottom = 50.0
 
-[node name="MenuButton" parent="LowerPanel/HBoxContainer" instance=ExtResource( 6 )]
+[node name="MenuButton" type="Button" parent="LowerPanel/HBoxContainer"]
 offset_top = 0.0
 offset_right = 720.0
 offset_bottom = 50.0
-
-[node name="Label" type="Label" parent="LowerPanel/HBoxContainer/MenuButton"]
-offset_right = 720.0
-offset_bottom = 50.0
+size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource( 3 )
 text = "Menu"
-align = 1
-valign = 1
 
 [node name="GameOverContainer" type="VBoxContainer" parent="."]
 visible = false
