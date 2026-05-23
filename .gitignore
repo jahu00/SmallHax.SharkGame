@@ -10,4 +10,9 @@ export_presets.cfg
 # Mono-specific ignores
 .mono/
 data_*/
-.kiro/specs/game-economy-and-shop/.config.kiro
+
+# Export
+SharkGame.apk*
+
+# Kiro
+.kiro/*

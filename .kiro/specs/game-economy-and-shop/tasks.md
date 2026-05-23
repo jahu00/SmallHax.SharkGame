@@ -26,7 +26,7 @@ This plan implements the full game economy system for SharkGame: coin earning, p
     - Implement `use_powerup(type) -> bool` that returns false if count ≤ 0, otherwise decrements and saves
     - _Requirements: 3.1, 3.2, 3.3, 3.4, 3.5, 3.6_
 
-  - [ ]* 1.3 Write property tests for persistence and value clamping
+  - [x] 1.3 Write property tests for persistence and value clamping
     - **Property 3: Persistence Round Trip** — For any valid coins [0, 999_999_999] and powerup counts [0, 99], serialize then deserialize produces identical state
     - **Property 4: Value Clamping** — Coin additions exceeding MAX_COINS clamp to MAX_COINS; powerup additions exceeding MAX_POWERUP clamp to 99; values never negative
     - **Validates: Requirements 3.2, 3.5**
@@ -42,7 +42,7 @@ This plan implements the full game economy system for SharkGame: coin earning, p
     - If `remaining_tiles > Settings.bonus_tile_threshold`: award zero
     - _Requirements: 2.1, 2.3, 2.4_
 
-  - [ ]* 2.3 Write property tests for coin earning
+  - [x] 2.3 Write property tests for coin earning
     - **Property 1: Coin Award on Game Over** — For any level ≥ 1 and any existing balance, coins awarded = level * coins_per_level, new balance = old + awarded
     - **Property 2: Bonus Coin Calculation** — For any remaining tiles and bonus points, correct bonus coins are calculated based on threshold
     - **Validates: Requirements 1.1, 2.1, 2.3**
