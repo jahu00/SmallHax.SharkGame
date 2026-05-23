@@ -1,6 +1,6 @@
 extends MarginContainer
 
-onready var bonus_label = get_node("HBoxContainer/BonusLabel")
+@onready var bonus_label = get_node("HBoxContainer/BonusLabel")
 var disappear_speed = 0.25
 
 

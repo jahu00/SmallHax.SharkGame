@@ -1,47 +1,43 @@
 extends Node2D
 
-onready var tile_layer = get_node("TileLayer")
-onready var score_label = get_node("VBoxContainer/HBoxContainer/VBoxContainer/FrameContainer2/ScoreLabel")
-onready var next_label = get_node("VBoxContainer/HBoxContainer/VBoxContainer2/MarginContainer/NextLabel")
-onready var level_label = get_node("VBoxContainer/MarginContainer/LevelLabel")
-onready var bonus_container = get_node("VBoxContainer/BonusContainer")
-onready var game_over_container = get_node("GameOverContainer")
+@onready var tile_layer = get_node("TileLayer")
+@onready var score_label = get_node("UpperPanel/HBoxContainer/VBoxContainer/FrameContainer2/ScoreLabel")
+@onready var next_label = get_node("UpperPanel/HBoxContainer/VBoxContainer2/MarginContainer/NextLabel")
+@onready var level_label = get_node("UpperPanel/MarginContainer/LevelLabel")
+@onready var bonus_container = get_node("UpperPanel/BonusContainer")
+@onready var game_over_container = get_node("GameOverContainer")
+@onready var menu_button = get_node("LowerPanel/HBoxContainer/MenuButton")
 
 var selected_tiles = []
 var tiles_to_destroy = []
 
 var tile_move_speed = 750
 
-var data = {
-	"score": 0,
-	"next": 0,
-	"level": 0
-}
-
 var state = "PlayerMove"
 
 func _ready():
-	randomize()
-	next_level()
+	game_over_container.connect("gui_input", Callable(self, "on_game_over_container_input"))
+	menu_button.connect("gui_input", Callable(self, "on_menu_button_input"))
+	init()
 
-func next_level():
-	data.level += 1
-	data.next += 1000 * data.level
+func init():
 	populate_board()
 	update_level()
 	state = "PlayerMove"
 
+func next_level():
+	GameStore.next_level()
+	init()
+	
+
 func populate_board():
-	for y in range(Settings.board_height):
-		for x in range(Settings.board_width):
-			var tile = Scenes.Tile.instance()
-			tile.data.x = x
-			tile.data.y = y
-			tile.position = Vector2(x * Settings.tile_width, y * Settings.tile_height)
-			tile.data.color = randi() % Settings.colors
-			tile.connect("clicked", self, "_on_tile_clicked")
-			tile.connect("destroyed", self, "_on_tile_destroyed")
-			tile_layer.add_child(tile)
+	for tile_data in GameStore.data.tiles:
+		var tile = Scenes.Tile.instantiate()
+		tile.init(tile_data)
+		tile.connect("clicked", Callable(self, "on_tile_clicked"))
+		tile.connect("destroyed", Callable(self, "on_tile_destroyed"))
+		tile_layer.add_child(tile)
+		
 
 func clear_board(tiles):
 	destroy_tiles(tiles)
@@ -69,7 +65,7 @@ func get_board():
 				continue
 			
 			var id = tiles.find(tile)
-			tiles.remove(id)
+			tiles.remove_at(id)
 		
 		board[x] = column
 	
@@ -117,7 +113,7 @@ func reposition_tiles_left(board):
 	
 	return new_board
 
-func _on_tile_clicked(tile):
+func on_tile_clicked(tile):
 	if (state == "PlayerMove"):
 		if (tile.selected):
 			add_score(get_tile_points(len(selected_tiles)))
@@ -148,12 +144,19 @@ func destroy_tiles(tiles):
 	tiles_to_destroy = [] + tiles
 	state = "DestroyTiles"
 
-func _on_tile_destroyed(tile):
+func on_tile_destroyed(tile):
 	var id = tiles_to_destroy.find(tile)
+	
+	var tile_data_id = GameStore.data.tiles.find(tile.data)
+	
+	if (tile_data_id != -1):
+		GameStore.data.tiles.remove_at(tile_data_id)
+	
 	if (id == -1):
 		return
 	
-	tiles_to_destroy.remove(id)
+	tiles_to_destroy.remove_at(id)
+	
 	if (len(tiles_to_destroy) > 0):
 		return
 	
@@ -269,26 +272,34 @@ func check_over():
 	return true
 
 func get_tile_points(tile_count):
-	return tile_count * tile_count * 5
+	return tile_count * tile_count * Settings.tile_point
 
 func get_bonus_points(tile_count):
-	return 2000 - get_tile_points(tile_count) * 4
+	return Settings.bonus_points - get_tile_points(tile_count) * (Settings.tile_point - 1)
 
 func add_score(points):
-	data.score += points
+	GameStore.add_points(points)
 	update_score()
 
 func update_level():
-	next_label.text = str(data.next)
-	level_label.text = "Level " + str(data.level)
+	next_label.text = str(GameStore.data.next)
+	level_label.text = "Level " + str(GameStore.data.level)
 	update_score()
 
 func update_score():
-	score_label.value = data.score
+	score_label.value = GameStore.data.score
 	if (can_advance()):
-		next_label.add_color_override("font_color", Color(0,1,0))
+		next_label.add_theme_color_override("font_color", Color(0,1,0))
 	else:
-		next_label.add_color_override("font_color", Color(1,0,0))
+		next_label.add_theme_color_override("font_color", Color(1,0,0))
 
 func can_advance():
-	return data.score >= data.next
+	return GameStore.data.score >= GameStore.data.next
+
+func on_game_over_container_input(event):
+	if event is InputEventMouseButton or event is InputEventScreenTouch:
+		Global.end_game()
+
+func on_menu_button_input(event):
+	if (event is InputEventMouseButton or event is InputEventScreenTouch) and state == "PlayerMove":
+		Global.change_scene_to_file(Scenes.SceneEnum.Menu)

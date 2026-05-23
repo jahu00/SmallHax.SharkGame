@@ -1,14 +1,14 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://ScoreLabel.gd" type="Script" id=1]
-[ext_resource path="res://ScoreFont.tres" type="DynamicFont" id=2]
+[ext_resource path="res://ScoreFont.tres" type="FontFile" id=2]
 [ext_resource path="res://BonusContainer.gd" type="Script" id=3]
 
 [node name="BonusContainer" type="MarginContainer"]
 modulate = Color( 1, 1, 1, 0 )
-margin_top = 206.0
-margin_right = 720.0
-margin_bottom = 300.0
+offset_top = 206.0
+offset_right = 720.0
+offset_bottom = 300.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 3 )
@@ -17,8 +17,8 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-margin_right = 720.0
-margin_bottom = 94.0
+offset_right = 720.0
+offset_bottom = 94.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 __meta__ = {
@@ -26,22 +26,22 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="HBoxContainer"]
-margin_right = 358.0
-margin_bottom = 94.0
+offset_right = 358.0
+offset_bottom = 94.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_fonts/font = ExtResource( 2 )
+theme_override_fonts/font = ExtResource( 2 )
 text = "Bonus"
 align = 1
 valign = 1
 
 [node name="BonusLabel" type="Label" parent="HBoxContainer"]
-margin_left = 362.0
-margin_right = 720.0
-margin_bottom = 94.0
+offset_left = 362.0
+offset_right = 720.0
+offset_bottom = 94.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_fonts/font = ExtResource( 2 )
+theme_override_fonts/font = ExtResource( 2 )
 text = "0"
 align = 1
 valign = 1
