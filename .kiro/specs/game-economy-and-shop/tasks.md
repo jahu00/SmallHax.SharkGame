@@ -1,4 +1,4 @@
-# Implementation Plan: Game Economy and Shop
+ # Implementation Plan: Game Economy and Shop
 
 ## Overview
 
@@ -6,15 +6,15 @@ This plan implements the full game economy system for SharkGame: coin earning, p
 
 ## Tasks
 
-- [ ] 1. Centralized configuration and persistence infrastructure
-  - [ ] 1.1 Add economy constants to Settings.gd
+- [x] 1. Centralized configuration and persistence infrastructure
+  - [x] 1.1 Add economy constants to Settings.gd
     - Add `coins_per_level = 1`, `bonus_to_coins_coefficient = 0.5`, `bonus_tile_threshold = 10`
     - Add `bomb_price = 100`, `rocket_price = 250`, `shuffle_price = 500`, `extra_life_price = 1000`
     - Add `spin_cost = 100`
     - Follow the existing `var` declaration pattern (no functions, no conditionals)
     - _Requirements: 12.1, 12.3, 1.3, 2.2, 2.4, 4.5, 9.2_
 
-  - [ ] 1.2 Implement persistence layer in GameStore.gd
+  - [x] 1.2 Implement persistence layer in GameStore.gd
     - Add `var coins: int = 0` and `var inventory: Dictionary = {"bomb": 0, "rocket": 0, "shuffle": 0, "extra_life": 0}`
     - Add constants `SAVE_PATH = "user://save_data.json"`, `MAX_COINS = 999_999_999`, `MAX_POWERUP = 99`
     - Implement `load_data()`: read JSON from SAVE_PATH, parse and restore coins/inventory, initialize defaults if file missing or corrupt
@@ -31,12 +31,12 @@ This plan implements the full game economy system for SharkGame: coin earning, p
     - **Property 4: Value Clamping** — Coin additions exceeding MAX_COINS clamp to MAX_COINS; powerup additions exceeding MAX_POWERUP clamp to 99; values never negative
     - **Validates: Requirements 3.2, 3.5**
 
-- [ ] 2. Coin earning system
-  - [ ] 2.1 Implement game-over coin award in GameStore.gd
+- [x] 2. Coin earning system
+  - [x] 2.1 Implement game-over coin award in GameStore.gd
     - Add `award_game_over_coins()` function: calculates `data.level * Settings.coins_per_level`, calls `add_coins()`
     - _Requirements: 1.1, 1.2_
 
-  - [ ] 2.2 Implement bonus coin award in GameStore.gd
+  - [x] 2.2 Implement bonus coin award in GameStore.gd
     - Add `award_bonus_coins(remaining_tiles: int, bonus_points: int)` function
     - If `remaining_tiles <= Settings.bonus_tile_threshold`: award `int(floor(bonus_points * Settings.bonus_to_coins_coefficient))`
     - If `remaining_tiles > Settings.bonus_tile_threshold`: award zero
