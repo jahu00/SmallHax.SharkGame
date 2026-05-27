@@ -109,12 +109,12 @@ This plan implements the full game economy system for SharkGame: coin earning, p
     - Disable spin button while animation plays and while balance < spin_cost
     - _Requirements: 9.1, 9.2, 9.3, 9.4, 9.5, 9.6, 9.7, 9.8, 9.9, 9.10, 9.11, 12.2_
 
-  - [ ]* 7.2 Write property tests for spinning wheel
+  - [x] 7.2 Write property tests for spinning wheel
     - **Property 14: Spin Cost Deduction** — For any balance >= spin_cost, new balance = old - spin_cost after spin
     - **Property 15: Prize Segment Mapping** — For any segment index [0,8], correct prize is returned and awarded
     - **Validates: Requirements 9.4, 9.5, 9.6**
 
-- [ ] 8. Checkpoint - Ensure shop and spinning wheel work
+- [x] 8. Checkpoint - Ensure shop and spinning wheel work
   - Ensure all tests pass, ask the user if questions arise.
 
 - [ ] 9. PowerupBar UI component
