@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c84wgi4qwgy8c"
-path="res://.godot/imported/adventure-background-cold-720.jpg-3a3eeb9941681118e45128f801091a0c.ctex"
+uid="uid://dgkkfe4t045hn"
+path="res://.godot/imported/tiles.png-0d11a4bcdfb48056f67a66da241684a1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://adventure-background-cold-720.jpg"
-dest_files=["res://.godot/imported/adventure-background-cold-720.jpg-3a3eeb9941681118e45128f801091a0c.ctex"]
+source_file="res://assets/tiles.png"
+dest_files=["res://.godot/imported/tiles.png-0d11a4bcdfb48056f67a66da241684a1.ctex"]
 
 [params]
 

@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 @onready var continue_button = get_node("CenterContainer2/VBoxContainer/ContinueButton")
 @onready var new_game_button = get_node("CenterContainer2/VBoxContainer/NewGameButton")

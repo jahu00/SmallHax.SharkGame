@@ -1,20 +1,19 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene format=3 uid="uid://c2x7t03rwjwxq"]
 
-[ext_resource path="res://frame.png" type="Texture2D" id=1]
+[ext_resource type="Texture2D" uid="uid://bpevhbxrirpg1" path="res://assets/frame.png" id="1_mk5so"]
 
-[node name="MarginContainer" type="MarginContainer"]
+[node name="MarginContainer" type="MarginContainer" unique_id=2068588119]
 offset_top = 54.0
 offset_right = 358.0
 offset_bottom = 104.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="NinePatchRect" type="NinePatchRect" parent="."]
-offset_right = 358.0
-offset_bottom = 50.0
+[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=877734727]
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture = ExtResource( 1 )
+texture = ExtResource("1_mk5so")
 patch_margin_left = 16
 patch_margin_top = 16
 patch_margin_right = 16

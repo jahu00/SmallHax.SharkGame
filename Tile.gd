@@ -28,7 +28,7 @@ func init(tile_data):
 	position = get_expected_position()
 
 func get_expected_position():
-	return Vector2(data.x * Settings.tile_width, data.y * Settings.tile_height)
+	return Vector2(data.x * Settings.tile_width, data.y  * Settings.tile_height)
 
 func set_color(value):
 	sprite.frame_coords.x = data.color

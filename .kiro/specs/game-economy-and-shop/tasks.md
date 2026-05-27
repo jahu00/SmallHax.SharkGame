@@ -83,8 +83,8 @@ This plan implements the full game economy system for SharkGame: coin earning, p
 - [x] 5. Checkpoint - Ensure code quality and input leak fixes work
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 6. Shop implementation
-  - [ ] 6.1 Create Shop scene (Shop.tscn + Shop.gd)
+- [x] 6. Shop implementation
+  - [x] 6.1 Create Shop scene (Shop.tscn + Shop.gd)
     - Create Shop.tscn with a VBoxContainer layout: coin balance label at top, item rows (Bomb, Rocket, Shuffle, Extra_Life) each with name, price, and Buy button, and a Back button
     - In `_ready()`: populate prices from Settings, update affordability based on `GameStore.coins`
     - Implement `_on_buy_pressed(item_type)`: call `GameStore.spend_coins(price)`, if true call `GameStore.add_powerup(item_type)`, show visual confirmation, update affordability
@@ -92,13 +92,13 @@ This plan implements the full game economy system for SharkGame: coin earning, p
     - Implement `update_affordability()`: disable/visually distinguish items where `GameStore.coins < price`
     - _Requirements: 4.1, 4.2, 4.3, 4.4, 4.7, 12.2_
 
-  - [ ]* 6.2 Write property tests for shop purchase logic
+  - [x] 6.2 Write property tests for shop purchase logic
     - **Property 5: Purchase Transaction Integrity** — For any balance ≥ price, purchase results in new_balance = old - price and powerup count += 1
     - **Property 6: Affordability Determination** — Item affordable iff balance >= price
     - **Validates: Requirements 4.3, 4.4**
 
-- [ ] 7. Spinning wheel implementation
-  - [ ] 7.1 Create SpinningWheel scene (SpinningWheel.tscn + SpinningWheel.gd)
+- [x] 7. Spinning wheel implementation
+  - [x] 7.1 Create SpinningWheel scene (SpinningWheel.tscn + SpinningWheel.gd)
     - Create SpinningWheel.tscn with a wheel visual (9 equal segments), spin button, coin balance display, prize result label, and Back button
     - Define `PRIZES` array constant with 9 entries matching the design prize table
     - In `_ready()`: set up wheel, check affordability (`GameStore.coins >= Settings.spin_cost`)
