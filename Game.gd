@@ -5,8 +5,11 @@ extends Node2D
 @onready var next_label = get_node("UpperPanel/HBoxContainer/VBoxContainer2/MarginContainer/NextLabel")
 @onready var level_label = get_node("UpperPanel/MarginContainer/LevelLabel")
 @onready var bonus_container = get_node("UpperPanel/BonusContainer")
+@onready var coin_label = get_node("UpperPanel/CoinDisplay/CoinLabel")
 @onready var game_over_container = get_node("GameOverContainer")
+@onready var game_over_button = get_node("GameOverContainer/GameOverButton")
 @onready var menu_button = get_node("LowerPanel/HBoxContainer/MenuButton")
+@onready var powerup_bar = get_node("LowerPanel/PowerupBar")
 
 var selected_tiles = []
 var tiles_to_destroy = []
@@ -14,16 +17,30 @@ var tiles_to_destroy = []
 var tile_move_speed = 750
 
 var state = "PlayerMove"
+var active_powerup = ""
+
+# Track remaining tiles and bonus points for coin awards on level clear
+var last_remaining_tiles: int = 0
+var last_bonus_points: int = 0
+
+# Extra life visual indication
+var extra_life_timer: float = 0.0
+var extra_life_showing: bool = false
 
 func _ready():
-	game_over_container.gui_input.connect(on_game_over_container_input)
+	game_over_button.pressed.connect(on_game_over_button_pressed)
 	menu_button.pressed.connect(on_menu_button_pressed)
+	powerup_bar.bomb_activated.connect(on_bomb_activated)
+	powerup_bar.rocket_activated.connect(on_rocket_activated)
+	powerup_bar.shuffle_activated.connect(on_shuffle_activated)
 	init()
 
 func init():
 	populate_board()
 	update_level()
+	update_coin_display()
 	state = "PlayerMove"
+	update_powerup_bar()
 
 func next_level():
 	GameStore.next_level()
@@ -40,8 +57,10 @@ func populate_board():
 		
 
 func clear_board(tiles):
-	destroy_tiles(tiles)
+	last_remaining_tiles = len(tiles)
 	var bonus_points = get_bonus_points(len(tiles))
+	last_bonus_points = bonus_points if bonus_points > 0 else 0
+	destroy_tiles(tiles)
 	if (bonus_points > 0):
 		bonus_container.show_bonus(bonus_points)
 		add_score(bonus_points)
@@ -114,6 +133,13 @@ func reposition_tiles_left(board):
 	return new_board
 
 func on_tile_clicked(tile):
+	if (state == "PowerupTarget"):
+		if active_powerup == "bomb":
+			execute_bomb(tile.data.x, tile.data.y)
+		elif active_powerup == "rocket":
+			execute_rocket(tile.data.x)
+		return
+
 	if (state == "PlayerMove"):
 		if (tile.selected):
 			add_score(get_tile_points(len(selected_tiles)))
@@ -215,6 +241,15 @@ func get_tile(tiles, x, y):
 	return null
 
 func _process(delta):
+	# Handle Extra Life display timer
+	if extra_life_showing:
+		extra_life_timer -= delta
+		if extra_life_timer <= 0.0:
+			extra_life_showing = false
+			hide_extra_life_label()
+			next_level()
+		return
+
 	if (state == "MoveTiles"):
 		var tiles_moved = false
 		var tiles = get_tiles()
@@ -243,13 +278,22 @@ func _process(delta):
 			var is_over = check_over()
 			if (!is_over):
 				state = "PlayerMove"
+				update_powerup_bar()
 			elif (len(tiles)):
 				clear_board(tiles)
 			elif (can_advance()):
+				GameStore.award_bonus_coins(last_remaining_tiles, last_bonus_points)
+				update_coin_display()
 				next_level()
+			elif GameStore.inventory.extra_life > 0:
+				GameStore.use_powerup("extra_life")
+				show_extra_life_used()
 			else:
+				GameStore.award_game_over_coins()
+				update_coin_display()
 				game_over_container.visible = true
 				state = "Over"
+				update_powerup_bar()
 
 func check_over():
 	var board = get_board()
@@ -296,11 +340,176 @@ func update_score():
 func can_advance():
 	return GameStore.data.score >= GameStore.data.next
 
-func on_game_over_container_input(event):
-	if event is InputEventMouseButton or event is InputEventScreenTouch:
-		game_over_container.accept_event()
-		Global.end_game()
+func on_game_over_button_pressed():
+	Global.end_game()
 
 func on_menu_button_pressed():
 	if state == "PlayerMove":
 		Global.change_scene_to_file(Scenes.SceneEnum.Menu)
+
+# --- Extra Life visual indication ---
+
+func show_extra_life_used():
+	state = "ExtraLifeUsed"
+	extra_life_showing = true
+	extra_life_timer = 1.0
+	var remaining = GameStore.inventory.extra_life
+	var extra_life_label = get_node_or_null("ExtraLifeLabel")
+	if extra_life_label == null:
+		extra_life_label = Label.new()
+		extra_life_label.name = "ExtraLifeLabel"
+		extra_life_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		extra_life_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		extra_life_label.set_anchors_preset(Control.PRESET_CENTER)
+		extra_life_label.add_theme_font_size_override("font_size", 48)
+		extra_life_label.add_theme_color_override("font_color", Color(0, 1, 0.5))
+		add_child(extra_life_label)
+	extra_life_label.text = "Extra Life! (%d remaining)" % remaining
+	extra_life_label.visible = true
+
+func hide_extra_life_label():
+	var extra_life_label = get_node_or_null("ExtraLifeLabel")
+	if extra_life_label != null:
+		extra_life_label.visible = false
+
+func update_powerup_bar():
+	powerup_bar.update_counts()
+	powerup_bar.set_buttons_enabled(state)
+
+func update_coin_display():
+	coin_label.text = str(GameStore.coins)
+
+# --- Powerup targeting ---
+
+func on_bomb_activated():
+	if state == "PowerupTarget" and active_powerup == "bomb":
+		# Re-pressing bomb button cancels targeting
+		cancel_powerup_targeting()
+		return
+	if state != "PlayerMove":
+		return
+	deselect_tiles()
+	state = "PowerupTarget"
+	active_powerup = "bomb"
+	update_powerup_bar()
+
+func cancel_powerup_targeting():
+	active_powerup = ""
+	state = "PlayerMove"
+	update_powerup_bar()
+
+func execute_bomb(cx: int, cy: int):
+	var tiles = get_tiles()
+	var bomb_targets = []
+	for dx in range(-1, 2):
+		for dy in range(-1, 2):
+			var tx = cx + dx
+			var ty = cy + dy
+			if tx < 0 or tx >= Settings.board_width:
+				continue
+			if ty < 0 or ty >= Settings.board_height:
+				continue
+			var tile = get_tile(tiles, tx, ty)
+			if tile != null:
+				bomb_targets.append(tile)
+	
+	if bomb_targets.size() == 0:
+		cancel_powerup_targeting()
+		return
+	
+	GameStore.use_powerup("bomb")
+	active_powerup = ""
+	update_powerup_bar()
+	destroy_tiles(bomb_targets)
+
+func on_rocket_activated():
+	if state == "PowerupTarget" and active_powerup == "rocket":
+		# Re-pressing rocket button cancels targeting
+		cancel_powerup_targeting()
+		return
+	if state != "PlayerMove":
+		return
+	deselect_tiles()
+	state = "PowerupTarget"
+	active_powerup = "rocket"
+	update_powerup_bar()
+
+func execute_rocket(column_x: int):
+	var tiles = get_tiles()
+	var column_tiles = []
+	for tile in tiles:
+		if tile.data.x == column_x:
+			column_tiles.append(tile)
+	
+	if column_tiles.size() == 0:
+		cancel_powerup_targeting()
+		return
+	
+	var tile_count = column_tiles.size()
+	var points = tile_count * tile_count * Settings.tile_point
+	add_score(points)
+	GameStore.use_powerup("rocket")
+	active_powerup = ""
+	update_powerup_bar()
+	destroy_tiles(column_tiles)
+
+# --- Shuffle powerup ---
+
+func on_shuffle_activated():
+	if state != "PlayerMove":
+		return
+	GameStore.use_powerup("shuffle")
+	deselect_tiles()
+	update_powerup_bar()
+	execute_shuffle()
+
+func execute_shuffle():
+	var tiles = get_tiles()
+	
+	# Group tiles by column
+	var columns: Dictionary = {}
+	for tile in tiles:
+		var col_x = tile.data.x
+		if not columns.has(col_x):
+			columns[col_x] = []
+		columns[col_x].append(tile)
+	
+	# For each column, rearrange tiles by greedy color grouping
+	for col_x in columns.keys():
+		var col_tiles = columns[col_x]
+		if col_tiles.size() <= 1:
+			continue
+		
+		# Count frequency of each color
+		var color_counts: Dictionary = {}
+		for tile in col_tiles:
+			var color = tile.data.color
+			if not color_counts.has(color):
+				color_counts[color] = 0
+			color_counts[color] += 1
+		
+		# Sort colors by frequency (most frequent first)
+		var color_list = color_counts.keys()
+		color_list.sort_custom(func(a, b): return color_counts[a] > color_counts[b])
+		
+		# Build ordered tile list: group tiles by color in frequency order
+		var ordered_tiles: Array = []
+		for color in color_list:
+			for tile in col_tiles:
+				if tile.data.color == color:
+					ordered_tiles.append(tile)
+		
+		# Find the lowest y position (highest row number = bottom of board)
+		# Tiles should be placed bottom-up starting from the highest y in the column
+		var max_y = 0
+		for tile in col_tiles:
+			if tile.data.y > max_y:
+				max_y = tile.data.y
+		
+		# Assign new y positions bottom-up (most frequent color at bottom)
+		var current_y = max_y
+		for tile in ordered_tiles:
+			tile.data.y = current_y
+			current_y -= 1
+	
+	state = "MoveTiles"

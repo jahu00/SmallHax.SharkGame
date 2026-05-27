@@ -32,6 +32,7 @@ func on_game_starting():
 	Global.change_scene_to_file(Scenes.SceneEnum.Game)
 
 func on_game_ending():
+	GameStore.save_data()
 	GameStore.clear_data()
 	Global.change_scene_to_file(Scenes.SceneEnum.Menu)
 

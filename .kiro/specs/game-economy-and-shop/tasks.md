@@ -117,33 +117,33 @@ This plan implements the full game economy system for SharkGame: coin earning, p
 - [x] 8. Checkpoint - Ensure shop and spinning wheel work
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 9. PowerupBar UI component
-  - [ ] 9.1 Create PowerupBar component (PowerupBar.tscn + PowerupBar.gd)
+- [x] 9. PowerupBar UI component
+  - [x] 9.1 Create PowerupBar component (PowerupBar.tscn + PowerupBar.gd)
     - Create PowerupBar.tscn as an HBoxContainer with buttons for Bomb, Rocket, Shuffle, each showing inventory count
     - Implement `update_counts()`: refresh displayed counts from `GameStore.inventory`
     - Define signals: `bomb_activated`, `rocket_activated`, `shuffle_activated`
     - Buttons emit their respective signal on press; disabled when count == 0 or game state is not PlayerMove
     - _Requirements: 5.1, 6.1, 7.1_
 
-  - [ ]* 9.2 Write property test for powerup button enabled state
+  - [x] 9.2 Write property test for powerup button enabled state
     - **Property 7: Powerup Button Enabled State** — Button enabled iff inventory count >= 1 AND game state is PlayerMove
     - **Validates: Requirements 5.1, 6.1, 7.1**
 
-- [ ] 10. Bomb powerup activation in Game.gd
-  - [ ] 10.1 Implement Bomb targeting and destruction logic
+- [x] 10. Bomb powerup activation in Game.gd
+  - [x] 10.1 Implement Bomb targeting and destruction logic
     - Add `PowerupTarget` sub-state to Game.gd state machine
     - When `bomb_activated` signal received: deselect any selected tiles, set state to "PowerupTarget", store active powerup type as "bomb"
     - On tile click in PowerupTarget state with bomb: calculate 3x3 area centered on clicked tile's (x, y), collect all tiles within bounds [0,9], destroy them (zero points), call `GameStore.use_powerup("bomb")`, transition to DestroyTiles
     - If player re-presses bomb button during PowerupTarget: cancel, return to PlayerMove
     - _Requirements: 5.1, 5.2, 5.3, 5.4, 5.5, 5.6_
 
-  - [ ]* 10.2 Write property tests for Bomb
+  - [x] 10.2 Write property tests for Bomb
     - **Property 8: Bomb Area Destruction** — For any center (cx, cy), exactly tiles with |x-cx|≤1 AND |y-cy|≤1 within [0,9] are destroyed, zero points awarded
     - **Property 11: Powerup Consumption (Bomb)** — After bomb activation on valid target, bomb inventory decreases by 1
     - **Validates: Requirements 5.2, 5.3, 5.4**
 
-- [ ] 11. Rocket powerup activation in Game.gd
-  - [ ] 11.1 Implement Rocket targeting and destruction logic
+- [x] 11. Rocket powerup activation in Game.gd
+  - [x] 11.1 Implement Rocket targeting and destruction logic
     - When `rocket_activated` signal received: deselect any selected tiles, set state to "PowerupTarget", store active powerup type as "rocket"
     - On tile click in PowerupTarget state with rocket: determine column from clicked tile's x, collect all tiles in that column
     - If column is empty: cancel activation, return to PlayerMove without consuming
@@ -151,14 +151,14 @@ This plan implements the full game economy system for SharkGame: coin earning, p
     - If player re-presses rocket button during PowerupTarget: cancel, return to PlayerMove
     - _Requirements: 6.1, 6.2, 6.3, 6.4, 6.5, 6.6, 6.7_
 
-  - [ ]* 11.2 Write property tests for Rocket
+  - [x] 11.2 Write property tests for Rocket
     - **Property 9: Rocket Column Destruction** — For any column with ≥1 tile, all tiles in that column destroyed, no tiles in other columns affected
     - **Property 10: Rocket Scoring** — Points awarded = N² × tile_point for N destroyed tiles
     - **Property 11: Powerup Consumption (Rocket)** — After rocket activation on non-empty column, rocket inventory decreases by 1
     - **Validates: Requirements 6.2, 6.4, 6.5**
 
-- [ ] 12. Shuffle powerup activation in Game.gd
-  - [ ] 12.1 Implement Shuffle logic
+- [x] 12. Shuffle powerup activation in Game.gd
+  - [x] 12.1 Implement Shuffle logic
     - When `shuffle_activated` signal received and state is PlayerMove: call `GameStore.use_powerup("shuffle")`
     - For each column independently: collect tile colors, sort by frequency (greedy grouping), assign new y positions bottom-up
     - Update `tile.data.y` for each rearranged tile
@@ -166,17 +166,17 @@ This plan implements the full game economy system for SharkGame: coin earning, p
     - After movement completes, return to PlayerMove (existing _process logic handles this)
     - _Requirements: 7.1, 7.2, 7.3, 7.4, 7.5, 7.6, 7.7_
 
-  - [ ]* 12.2 Write property tests for Shuffle
+  - [x] 12.2 Write property tests for Shuffle
     - **Property 12: Shuffle Maximizes Vertical Adjacency** — After shuffle, each column has maximum possible vertically adjacent same-color pairs
     - **Property 13: Shuffle Preserves Color Multiset** — Multiset of colors per column is identical before and after shuffle
     - **Property 11: Powerup Consumption (Shuffle)** — After shuffle activation, shuffle inventory decreases by 1
     - **Validates: Requirements 7.2, 7.4, 7.5**
 
-- [ ] 13. Checkpoint - Ensure all powerups work correctly
+- [x] 13. Checkpoint - Ensure all powerups work correctly
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 14. Extra Life and game-over coin integration
-  - [ ] 14.1 Integrate Extra Life and coin awards into Game.gd game-over flow
+- [x] 14. Extra Life and game-over coin integration
+  - [x] 14.1 Integrate Extra Life and coin awards into Game.gd game-over flow
     - In the MoveTiles completion logic (when no moves remain and board is clear):
       - If `can_advance()`: call `GameStore.award_bonus_coins(remaining_tiles, bonus_points)`, then `next_level()`
       - If NOT `can_advance()` and `GameStore.inventory.extra_life > 0`: call `GameStore.use_powerup("extra_life")`, show visual indication for 1 second (remaining count), then call `next_level()`
@@ -184,27 +184,27 @@ This plan implements the full game economy system for SharkGame: coin earning, p
     - Ensure persistence is called before scene transition on game over
     - _Requirements: 1.1, 1.2, 2.1, 8.1, 8.2, 8.3, 8.4_
 
-  - [ ] 14.2 Wire PowerupBar into Game scene
+  - [x] 14.2 Wire PowerupBar into Game scene
     - Add PowerupBar instance to Game.tscn (lower panel area)
     - Connect `bomb_activated`, `rocket_activated`, `shuffle_activated` signals to Game.gd handlers
     - Call `powerup_bar.update_counts()` after any powerup use or state change
     - Disable powerup buttons when state != PlayerMove
     - _Requirements: 5.1, 6.1, 7.1_
 
-- [ ] 15. Final integration and wiring
-  - [ ] 15.1 Wire coin display into Menu and Game scenes
+- [x] 15. Final integration and wiring
+  - [x] 15.1 Wire coin display into Menu and Game scenes
     - Menu: show coin balance, update when returning from Shop/SpinningWheel
     - Game: optionally show coin balance in upper panel (or rely on end-of-game display)
     - Ensure `GameStore.coins` is always loaded from persistence on app start
     - _Requirements: 4.2, 3.2_
 
-  - [ ] 15.2 Update Game.gd end-of-game flow to integrate all systems
+  - [x] 15.2 Update Game.gd end-of-game flow to integrate all systems
     - Ensure `on_game_over_container_input` (now using pressed signal) calls `Global.end_game()`
     - In `Global.end_game()` or `Main.on_game_ending()`: ensure coins are persisted, then transition to Menu
     - Verify bonus coins are awarded on level completion when tiles ≤ threshold
     - _Requirements: 1.2, 2.1, 10.1_
 
-- [ ] 16. Final checkpoint - Ensure all systems integrated and tests pass
+- [x] 16. Final checkpoint - Ensure all systems integrated and tests pass
   - Ensure all tests pass, ask the user if questions arise.
 
 ## Notes
