@@ -15,7 +15,7 @@ const PRIZES = [
 const SEGMENT_COUNT = 9
 const SEGMENT_ANGLE = TAU / SEGMENT_COUNT
 
-@onready var coin_label = get_node("CoinDisplay/CoinLabel")
+@onready var gold_panel = get_node("GoldPanel")
 @onready var spin_button = get_node("CenterContainer/VBoxContainer/SpinButton")
 @onready var back_button = get_node("CenterContainer/VBoxContainer/BackButton")
 @onready var prize_result_label = get_node("CenterContainer/VBoxContainer/PrizeResultLabel")
@@ -40,7 +40,7 @@ func _process(delta):
 			prize_result_label.text = ""
 			_update_spin_affordability()
 
-	coin_label.text = str(GameStore.coins)
+	gold_panel.update_coins()
 
 func _draw_wheel_segments():
 	# Draw 9 colored segments on the wheel node
@@ -187,7 +187,7 @@ func _on_back_pressed():
 	Global.change_scene_to_file(Scenes.SceneEnum.Menu)
 
 func _update_coin_display():
-	coin_label.text = str(GameStore.coins)
+	gold_panel.update_coins()
 
 func _update_spin_affordability():
 	spin_button.disabled = _is_spinning or GameStore.coins < Settings.spin_cost

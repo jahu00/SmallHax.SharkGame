@@ -1,6 +1,6 @@
 extends Control
 
-@onready var coin_label = get_node("CoinDisplay/CoinLabel")
+@onready var gold_panel = get_node("GoldPanel")
 @onready var back_button = get_node("CenterContainer/VBoxContainer/BackButton")
 
 @onready var bomb_button = get_node("CenterContainer/VBoxContainer/BombRow/BuyBombButton")
@@ -37,7 +37,7 @@ func _process(delta):
 		if _confirmation_timer <= 0.0:
 			confirmation_label.text = ""
 
-	coin_label.text = str(GameStore.coins)
+	gold_panel.update_coins()
 
 func _on_buy_pressed(item_type: String):
 	var price = _get_price(item_type)
@@ -50,7 +50,7 @@ func _on_back_pressed():
 	Global.change_scene_to_file(Scenes.SceneEnum.Menu)
 
 func update_affordability():
-	coin_label.text = str(GameStore.coins)
+	gold_panel.update_coins()
 
 	bomb_button.disabled = GameStore.coins < Settings.bomb_price
 	harpoon_button.disabled = GameStore.coins < Settings.harpoon_price

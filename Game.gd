@@ -5,7 +5,7 @@ extends Control
 @onready var next_label = get_node("UpperPanel/HBoxContainer/VBoxContainer2/MarginContainer/NextLabel")
 @onready var level_label = get_node("UpperPanel/MarginContainer/LevelLabel")
 @onready var bonus_container = get_node("UpperPanel/BonusContainer")
-@onready var coin_label = get_node("UpperPanel/CoinDisplay/CoinLabel")
+@onready var gold_panel = get_node("UpperPanel/GoldPanel")
 @onready var game_over_container = get_node("GameOverContainer")
 @onready var game_over_button = get_node("GameOverContainer/GameOverButton")
 @onready var menu_button = get_node("LowerPanel/HBoxContainer/MenuButton")
@@ -377,7 +377,7 @@ func update_powerup_bar():
 	powerup_bar.set_buttons_enabled(state)
 
 func update_coin_display():
-	coin_label.text = str(GameStore.coins)
+	gold_panel.update_coins()
 
 # --- Powerup targeting ---
 

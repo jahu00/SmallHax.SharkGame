@@ -13,7 +13,7 @@ var bonus_points = 2000
 var tile_point = 5
 
 # Economy
-var coins_per_level = 1
+var coins_per_level = 50
 var bonus_to_coins_coefficient = 0.5
 var bonus_tile_threshold = 10
 

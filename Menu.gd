@@ -6,7 +6,7 @@ extends Control
 @onready var shop_button = get_node("CenterContainer2/VBoxContainer/ShopButton")
 @onready var spinning_wheel_button = get_node("CenterContainer2/VBoxContainer/SpinningWheelButton")
 @onready var settings_button = get_node("CenterContainer2/VBoxContainer/SettingsButton")
-@onready var coin_label = get_node("CoinDisplay/CoinLabel")
+@onready var gold_panel = get_node("GoldPanel")
 
 func _ready():
 	new_game_button.pressed.connect(_on_new_game_pressed)
@@ -36,7 +36,7 @@ func _on_settings_pressed():
 	Global.change_scene_to_file(Scenes.SceneEnum.SettingsMenu)
 
 func _update_coin_display():
-	coin_label.text = str(GameStore.coins)
+	gold_panel.update_coins()
 
 func _process(delta):
 	if GameStore.data == null and continue_button.visible:

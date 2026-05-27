@@ -3,7 +3,7 @@
 [ext_resource type="FontFile" path="res://ScoreFont.tres" id="2"]
 [ext_resource type="Texture2D" uid="uid://dj3txg7weleny" path="res://assets/ingame.png" id="2_c0ofq"]
 [ext_resource type="Script" uid="uid://cy4a5rggmhghn" path="res://Shop.gd" id="3"]
-[ext_resource type="Texture2D" uid="uid://mr4u4ouc55yp" path="res://coin.png" id="4"]
+[ext_resource type="PackedScene" uid="uid://dg0ldpan3lscn" path="res://GoldPanel.tscn" id="5"]
 
 [node name="Shop" type="Control" unique_id=2000992995]
 layout_mode = 3
@@ -14,26 +14,12 @@ script = ExtResource("3")
 layout_mode = 0
 texture = ExtResource("2_c0ofq")
 
-[node name="CoinDisplay" type="HBoxContainer" parent="." unique_id=1162021107]
+[node name="GoldPanel" parent="." instance=ExtResource("5")]
 layout_mode = 0
 offset_left = 520.0
 offset_top = 20.0
 offset_right = 700.0
 offset_bottom = 60.0
-
-[node name="CoinIcon" type="TextureRect" parent="CoinDisplay" unique_id=803464706]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-texture = ExtResource("4")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="CoinLabel" type="Label" parent="CoinDisplay" unique_id=182718033]
-custom_minimum_size = Vector2(100, 32)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2")
-text = "0"
-vertical_alignment = 1
 
 [node name="CenterContainer" type="CenterContainer" parent="." unique_id=620593211]
 layout_mode = 0

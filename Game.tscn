@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c2x7t03rwjwxq" path="res://FrameContainer.tscn" id="6"]
 [ext_resource type="PackedScene" path="res://BonusContainer.tscn" id="7"]
 [ext_resource type="PackedScene" path="res://PowerupBar.tscn" id="8"]
-[ext_resource type="Texture2D" uid="uid://mr4u4ouc55yp" path="res://coin.png" id="9"]
+[ext_resource type="PackedScene" uid="uid://dg0ldpan3lscn" path="res://GoldPanel.tscn" id="9"]
 
 [node name="Game" type="Control" unique_id=1359609501]
 layout_mode = 3
@@ -147,23 +147,9 @@ vertical_alignment = 1
 [node name="BonusContainer" parent="UpperPanel" unique_id=1598520241 instance=ExtResource("7")]
 layout_mode = 2
 
-[node name="CoinDisplay" type="HBoxContainer" parent="UpperPanel" unique_id=206364248]
+[node name="GoldPanel" parent="UpperPanel" instance=ExtResource("9")]
 layout_mode = 2
-alignment = 2
-
-[node name="CoinIcon" type="TextureRect" parent="UpperPanel/CoinDisplay" unique_id=1867580723]
-custom_minimum_size = Vector2(24, 24)
-layout_mode = 2
-texture = ExtResource("9")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="CoinLabel" type="Label" parent="UpperPanel/CoinDisplay" unique_id=1082548017]
-custom_minimum_size = Vector2(80, 24)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3")
-text = "0"
-vertical_alignment = 1
+size_flags_horizontal = 10
 
 [node name="LowerPanel" type="VBoxContainer" parent="." unique_id=327577241]
 layout_mode = 0

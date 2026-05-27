@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://sndp0tlh117l" path="res://assets/menu.png" id="2_cx167"]
 [ext_resource type="Script" uid="uid://b4ug181wvwt83" path="res://Menu.gd" id="3"]
 [ext_resource type="Texture2D" uid="uid://fybw1pp1uvm6" path="res://assets/logo.png" id="3_dolsu"]
-[ext_resource type="Texture2D" uid="uid://mr4u4ouc55yp" path="res://coin.png" id="4"]
+[ext_resource type="PackedScene" uid="uid://dg0ldpan3lscn" path="res://GoldPanel.tscn" id="5"]
 
 [node name="Menu" type="Control" unique_id=444607820]
 layout_mode = 3
@@ -28,26 +28,13 @@ texture = ExtResource("3_dolsu")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="CoinDisplay" type="HBoxContainer" parent="." unique_id=865089376]
+[node name="GoldPanel" parent="." unique_id=390820669 instance=ExtResource("5")]
+visible = false
 layout_mode = 0
 offset_left = 520.0
 offset_top = 20.0
 offset_right = 700.0
 offset_bottom = 60.0
-
-[node name="CoinIcon" type="TextureRect" parent="CoinDisplay" unique_id=1869306479]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-texture = ExtResource("4")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="CoinLabel" type="Label" parent="CoinDisplay" unique_id=1080350840]
-custom_minimum_size = Vector2(100, 32)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2")
-text = "0"
-vertical_alignment = 1
 
 [node name="CenterContainer2" type="CenterContainer" parent="." unique_id=1440858929]
 layout_mode = 0
@@ -84,7 +71,7 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("2")
 text = "Spin the Wheel"
 
-[node name="SettingsButton" type="Button" parent="CenterContainer2/VBoxContainer"]
+[node name="SettingsButton" type="Button" parent="CenterContainer2/VBoxContainer" unique_id=308720311]
 custom_minimum_size = Vector2(360, 50)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2")
