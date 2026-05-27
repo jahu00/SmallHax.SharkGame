@@ -1,6 +1,6 @@
-extends Node2D
+extends Control
 
-@onready var tile_layer = get_node("TileLayer")
+@onready var tile_layer = find_child("TileLayer")
 @onready var score_label = get_node("UpperPanel/HBoxContainer/VBoxContainer/FrameContainer2/ScoreLabel")
 @onready var next_label = get_node("UpperPanel/HBoxContainer/VBoxContainer2/MarginContainer/NextLabel")
 @onready var level_label = get_node("UpperPanel/MarginContainer/LevelLabel")

@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 @onready var coin_label = get_node("CoinDisplay/CoinLabel")
 @onready var back_button = get_node("CenterContainer/VBoxContainer/BackButton")

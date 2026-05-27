@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 @onready var back_button = get_node("CenterContainer/VBoxContainer/BackButton")
 @onready var reset_button = get_node("CenterContainer/VBoxContainer/ResetRow/ResetButton")

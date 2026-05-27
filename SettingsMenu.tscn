@@ -1,26 +1,29 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://rjctkgb3yd2p"]
 
 [ext_resource type="FontFile" path="res://ScoreFont.tres" id="2"]
 [ext_resource type="Texture2D" uid="uid://dj3txg7weleny" path="res://assets/ingame.png" id="2_c0ofq"]
-[ext_resource type="Script" path="res://SettingsMenu.gd" id="3"]
+[ext_resource type="Script" uid="uid://b4uu0ver5gxf7" path="res://SettingsMenu.gd" id="3"]
 
-[node name="SettingsMenu" type="Node2D"]
+[node name="SettingsMenu" type="Control" unique_id=1515824006]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("3")
 
-[node name="Background" type="Sprite2D" parent="."]
+[node name="Background" type="TextureRect" parent="." unique_id=732893312]
+layout_mode = 0
 texture = ExtResource("2_c0ofq")
-centered = false
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=930565090]
+layout_mode = 0
 offset_right = 720.0
 offset_bottom = 1280.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=1311261516]
 custom_minimum_size = Vector2(600, 0)
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="TitleLabel" type="Label" parent="CenterContainer/VBoxContainer"]
+[node name="TitleLabel" type="Label" parent="CenterContainer/VBoxContainer" unique_id=851636460]
 custom_minimum_size = Vector2(600, 60)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2")
@@ -28,32 +31,32 @@ text = "Settings"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ResetRow" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+[node name="ResetRow" type="HBoxContainer" parent="CenterContainer/VBoxContainer" unique_id=821967289]
 custom_minimum_size = Vector2(600, 50)
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="ResetLabel" type="Label" parent="CenterContainer/VBoxContainer/ResetRow"]
+[node name="ResetLabel" type="Label" parent="CenterContainer/VBoxContainer/ResetRow" unique_id=1794064919]
 custom_minimum_size = Vector2(300, 50)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2")
 text = "Erase all progress"
 vertical_alignment = 1
 
-[node name="ResetButton" type="Button" parent="CenterContainer/VBoxContainer/ResetRow"]
+[node name="ResetButton" type="Button" parent="CenterContainer/VBoxContainer/ResetRow" unique_id=1003657622]
 custom_minimum_size = Vector2(280, 50)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2")
 text = "Reset Game Data"
 
-[node name="ConfirmationLabel" type="Label" parent="CenterContainer/VBoxContainer"]
+[node name="ConfirmationLabel" type="Label" parent="CenterContainer/VBoxContainer" unique_id=1910310301]
 custom_minimum_size = Vector2(600, 40)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="BackButton" type="Button" parent="CenterContainer/VBoxContainer"]
+[node name="BackButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=537408562]
 custom_minimum_size = Vector2(360, 50)
 layout_mode = 2
 size_flags_horizontal = 4

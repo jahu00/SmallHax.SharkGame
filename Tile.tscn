@@ -3,9 +3,6 @@
 [ext_resource type="Script" uid="uid://bjvyjlt077y0c" path="res://Tile.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://dgkkfe4t045hn" path="res://assets/tiles.png" id="2_je3b2"]
 
-[sub_resource type="RectangleShape2D" id="1"]
-size = Vector2(64, 64)
-
 [sub_resource type="Animation" id="2"]
 resource_name = "Default"
 length = 0.001
@@ -133,19 +130,23 @@ _data = {
 &"RESET": SubResource("4")
 }
 
-[node name="Tile" type="Area2D" unique_id=743962667]
+[node name="Tile" type="Control" unique_id=743962667]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 64.0
+offset_bottom = 64.0
 scale = Vector2(1.5, 1.5)
+pivot_offset = Vector2(32, 32)
 script = ExtResource("1")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1453779915]
 modulate = Color(1, 1, 1, 0)
+position = Vector2(32, 32)
 scale = Vector2(0.54, 0.54)
 texture = ExtResource("2_je3b2")
 hframes = 6
 vframes = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1607950077]
-shape = SubResource("1")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=699530018]
 libraries/ = SubResource("AnimationLibrary_au6lh")

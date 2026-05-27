@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 const PRIZES = [
 	{"type": "nothing", "amount": 0},
