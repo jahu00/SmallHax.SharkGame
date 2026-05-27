@@ -4,7 +4,7 @@ var data
 
 # Persistent state (loaded on _ready, saved on change)
 var coins: int = 0
-var inventory: Dictionary = {"bomb": 0, "rocket": 0, "shuffle": 0, "extra_life": 0}
+var inventory: Dictionary = {"bomb": 0, "harpoon": 0, "shuffle": 0, "extra_life": 0}
 
 const SAVE_PATH = "user://save_data.json"
 const MAX_COINS = 999_999_999
@@ -47,6 +47,9 @@ func load_data():
 	# Restore inventory
 	if parsed.has("inventory") and typeof(parsed["inventory"]) == TYPE_DICTIONARY:
 		var saved_inv = parsed["inventory"]
+		# Migrate old "rocket" key to "harpoon"
+		if saved_inv.has("rocket") and not saved_inv.has("harpoon"):
+			saved_inv["harpoon"] = saved_inv["rocket"]
 		for key in inventory.keys():
 			if saved_inv.has(key) and typeof(saved_inv[key]) in [TYPE_INT, TYPE_FLOAT]:
 				inventory[key] = clampi(int(saved_inv[key]), 0, MAX_POWERUP)
@@ -106,12 +109,17 @@ func award_bonus_coins(remaining_tiles: int, bonus_points: int):
 		var bonus_coins = int(floor(bonus_points * Settings.bonus_to_coins_coefficient))
 		add_coins(bonus_coins)
 
+func reset_all_data():
+	_initialize_defaults()
+	clear_data()
+	save_data()
+
 func _initialize_defaults():
 	coins = 0
 	_initialize_defaults_inventory()
 
 func _initialize_defaults_inventory():
-	inventory = {"bomb": 0, "rocket": 0, "shuffle": 0, "extra_life": 0}
+	inventory = {"bomb": 0, "harpoon": 0, "shuffle": 0, "extra_life": 0}
 
 # --- Existing game session methods ---
 

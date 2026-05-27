@@ -56,7 +56,7 @@ func rand_powerup_count() -> int:
 func rand_inventory() -> Dictionary:
 	return {
 		"bomb": rand_powerup_count(),
-		"rocket": rand_powerup_count(),
+		"harpoon": rand_powerup_count(),
 		"shuffle": rand_powerup_count(),
 		"extra_life": rand_powerup_count(),
 	}
@@ -88,7 +88,7 @@ func test_property_3_persistence_round_trip():
 
 		# Corrupt in-memory state to ensure load actually restores
 		GameStore.coins = -1
-		GameStore.inventory = {"bomb": -1, "rocket": -1, "shuffle": -1, "extra_life": -1}
+		GameStore.inventory = {"bomb": -1, "harpoon": -1, "shuffle": -1, "extra_life": -1}
 
 		# Deserialize (load)
 		GameStore.load_data()
@@ -147,7 +147,7 @@ func test_property_4_value_clamping_powerups():
 	# Powerup additions exceeding MAX_POWERUP clamp to 99
 	print("Property 4b: Value Clamping - Powerups (%d iterations)" % ITERATIONS)
 
-	var powerup_types = ["bomb", "rocket", "shuffle", "extra_life"]
+	var powerup_types = ["bomb", "harpoon", "shuffle", "extra_life"]
 
 	for i in range(ITERATIONS):
 		var ptype = powerup_types[randi() % powerup_types.size()]
@@ -184,7 +184,7 @@ func test_property_4_value_clamping_never_negative():
 	# Values never go negative even with large spend/use operations
 	print("Property 4c: Value Clamping - Never Negative (%d iterations)" % ITERATIONS)
 
-	var powerup_types = ["bomb", "rocket", "shuffle", "extra_life"]
+	var powerup_types = ["bomb", "harpoon", "shuffle", "extra_life"]
 
 	for i in range(ITERATIONS):
 		# Set a random valid starting state

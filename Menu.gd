@@ -5,6 +5,7 @@ extends Control
 @onready var exit_button = get_node("CenterContainer2/VBoxContainer/ExitButton")
 @onready var shop_button = get_node("CenterContainer2/VBoxContainer/ShopButton")
 @onready var spinning_wheel_button = get_node("CenterContainer2/VBoxContainer/SpinningWheelButton")
+@onready var settings_button = get_node("CenterContainer2/VBoxContainer/SettingsButton")
 @onready var coin_label = get_node("CoinDisplay/CoinLabel")
 
 func _ready():
@@ -13,6 +14,7 @@ func _ready():
 	exit_button.pressed.connect(_on_exit_pressed)
 	shop_button.pressed.connect(_on_shop_pressed)
 	spinning_wheel_button.pressed.connect(_on_spinning_wheel_pressed)
+	settings_button.pressed.connect(_on_settings_pressed)
 	_update_coin_display()
 
 func _on_new_game_pressed():
@@ -29,6 +31,9 @@ func _on_shop_pressed():
 
 func _on_spinning_wheel_pressed():
 	Global.change_scene_to_file(Scenes.SceneEnum.SpinningWheel)
+
+func _on_settings_pressed():
+	Global.change_scene_to_file(Scenes.SceneEnum.SettingsMenu)
 
 func _update_coin_display():
 	coin_label.text = str(GameStore.coins)

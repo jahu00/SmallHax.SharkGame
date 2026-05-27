@@ -84,6 +84,12 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("2")
 text = "Spin the Wheel"
 
+[node name="SettingsButton" type="Button" parent="CenterContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(360, 50)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2")
+text = "Settings"
+
 [node name="ExitButton" type="Button" parent="CenterContainer2/VBoxContainer" unique_id=1103640580]
 custom_minimum_size = Vector2(360, 50)
 layout_mode = 2

@@ -1,9 +1,9 @@
-# Feature: game-economy-and-shop, Property 9: Rocket Column Destruction
-# Feature: game-economy-and-shop, Property 10: Rocket Scoring
-# Feature: game-economy-and-shop, Property 11: Powerup Consumption (Rocket)
+# Feature: game-economy-and-shop, Property 9: Harpoon Column Destruction
+# Feature: game-economy-and-shop, Property 10: Harpoon Scoring
+# Feature: game-economy-and-shop, Property 11: Powerup Consumption (Harpoon)
 # Validates: Requirements 6.2, 6.4, 6.5
 #
-# Property tests for rocket powerup logic.
+# Property tests for harpoon powerup logic.
 # Implemented as a GdUnit4-compatible test suite with custom repeat loops
 # and randomized input generation.
 #
@@ -22,12 +22,12 @@ var _errors: Array[String] = []
 
 
 func _ready():
-	print("=== Property Tests: Rocket Powerup Logic ===")
+	print("=== Property Tests: Harpoon Powerup Logic ===")
 	print("")
 
-	test_property_9_rocket_column_destruction()
-	test_property_10_rocket_scoring()
-	test_property_11_powerup_consumption_rocket()
+	test_property_9_harpoon_column_destruction()
+	test_property_10_harpoon_scoring()
+	test_property_11_powerup_consumption_harpoon()
 
 	print("")
 	print("=== Results: %d passed, %d failed ===" % [_passed, _failed])
@@ -86,19 +86,19 @@ func get_column_tiles(tiles: Array, column_x: int) -> Array:
 	return result
 
 
-func rand_rocket_inventory() -> int:
-	# Generate a random rocket count >= 1
+func rand_harpoon_inventory() -> int:
+	# Generate a random harpoon count >= 1
 	return 1 + randi() % GameStore.MAX_POWERUP
 
 
-# --- Property 9: Rocket Column Destruction ---
+# --- Property 9: Harpoon Column Destruction ---
 # For any column with >=1 tile, all tiles in that column are destroyed,
 # no tiles in other columns affected.
 
-func test_property_9_rocket_column_destruction():
-	# Feature: game-economy-and-shop, Property 9: Rocket Column Destruction
+func test_property_9_harpoon_column_destruction():
+	# Feature: game-economy-and-shop, Property 9: Harpoon Column Destruction
 	# **Validates: Requirements 6.2**
-	print("Property 9: Rocket Column Destruction (%d iterations)" % ITERATIONS)
+	print("Property 9: Harpoon Column Destruction (%d iterations)" % ITERATIONS)
 
 	for i in range(ITERATIONS):
 		var column_x = rand_column()
@@ -113,7 +113,7 @@ func test_property_9_rocket_column_destruction():
 			if tile["x"] != column_x:
 				expected_surviving.append(tile)
 
-		# Replicate the rocket algorithm from Game.gd execute_rocket
+		# Replicate the harpoon algorithm from Game.gd execute_harpoon
 		var algorithm_destroyed: Array = []
 		for tile in tiles:
 			if tile["x"] == column_x:
@@ -152,16 +152,16 @@ func test_property_9_rocket_column_destruction():
 					_record_failure(msg)
 					return
 
-	_record_pass("Property 9: Rocket Column Destruction")
+	_record_pass("Property 9: Harpoon Column Destruction")
 
 
-# --- Property 10: Rocket Scoring ---
+# --- Property 10: Harpoon Scoring ---
 # Points awarded = N² × tile_point for N destroyed tiles.
 
-func test_property_10_rocket_scoring():
-	# Feature: game-economy-and-shop, Property 10: Rocket Scoring
+func test_property_10_harpoon_scoring():
+	# Feature: game-economy-and-shop, Property 10: Harpoon Scoring
 	# **Validates: Requirements 6.5**
-	print("Property 10: Rocket Scoring (%d iterations)" % ITERATIONS)
+	print("Property 10: Harpoon Scoring (%d iterations)" % ITERATIONS)
 
 	for i in range(ITERATIONS):
 		var column_x = rand_column()
@@ -174,7 +174,7 @@ func test_property_10_rocket_scoring():
 		# Compute expected points: N² × tile_point
 		var expected_points = n * n * Settings.tile_point
 
-		# Replicate the scoring algorithm from Game.gd execute_rocket
+		# Replicate the scoring algorithm from Game.gd execute_harpoon
 		var tile_count = column_tiles.size()
 		var algorithm_points = tile_count * tile_count * Settings.tile_point
 
@@ -198,40 +198,40 @@ func test_property_10_rocket_scoring():
 				_record_failure(msg)
 				return
 
-	_record_pass("Property 10: Rocket Scoring")
+	_record_pass("Property 10: Harpoon Scoring")
 
 
-# --- Property 11: Powerup Consumption (Rocket) ---
-# After rocket activation on non-empty column, rocket inventory decreases by 1.
+# --- Property 11: Powerup Consumption (Harpoon) ---
+# After harpoon activation on non-empty column, harpoon inventory decreases by 1.
 
-func test_property_11_powerup_consumption_rocket():
-	# Feature: game-economy-and-shop, Property 11: Powerup Consumption (Rocket)
+func test_property_11_powerup_consumption_harpoon():
+	# Feature: game-economy-and-shop, Property 11: Powerup Consumption (Harpoon)
 	# **Validates: Requirements 6.4**
-	print("Property 11: Powerup Consumption - Rocket (%d iterations)" % ITERATIONS)
+	print("Property 11: Powerup Consumption - Harpoon (%d iterations)" % ITERATIONS)
 
 	for i in range(ITERATIONS):
-		var starting_count = rand_rocket_inventory()
+		var starting_count = rand_harpoon_inventory()
 
 		# Set up GameStore state
-		GameStore.inventory["rocket"] = starting_count
+		GameStore.inventory["harpoon"] = starting_count
 
-		# Execute: use_powerup("rocket") — this is what execute_rocket calls
-		var result = GameStore.use_powerup("rocket")
+		# Execute: use_powerup("harpoon") — this is what execute_harpoon calls
+		var result = GameStore.use_powerup("harpoon")
 
 		# Assert: use_powerup returns true (count was >= 1)
 		if result != true:
-			var msg = "Iteration %d: use_powerup('rocket') returned false with count %d" % [i, starting_count]
+			var msg = "Iteration %d: use_powerup('harpoon') returned false with count %d" % [i, starting_count]
 			_record_failure(msg)
 			return
 
-		# Assert: rocket inventory decreased by exactly 1
+		# Assert: harpoon inventory decreased by exactly 1
 		var expected_count = starting_count - 1
-		if GameStore.inventory["rocket"] != expected_count:
-			var msg = "Iteration %d: expected rocket count %d, got %d (start=%d)" % [i, expected_count, GameStore.inventory["rocket"], starting_count]
+		if GameStore.inventory["harpoon"] != expected_count:
+			var msg = "Iteration %d: expected harpoon count %d, got %d (start=%d)" % [i, expected_count, GameStore.inventory["harpoon"], starting_count]
 			_record_failure(msg)
 			return
 
-	_record_pass("Property 11: Powerup Consumption (Rocket)")
+	_record_pass("Property 11: Powerup Consumption (Harpoon)")
 
 
 # --- Test Infrastructure ---

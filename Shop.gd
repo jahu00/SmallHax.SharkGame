@@ -4,12 +4,12 @@ extends Node2D
 @onready var back_button = get_node("CenterContainer/VBoxContainer/BackButton")
 
 @onready var bomb_button = get_node("CenterContainer/VBoxContainer/BombRow/BuyBombButton")
-@onready var rocket_button = get_node("CenterContainer/VBoxContainer/RocketRow/BuyRocketButton")
+@onready var harpoon_button = get_node("CenterContainer/VBoxContainer/HarpoonRow/BuyHarpoonButton")
 @onready var shuffle_button = get_node("CenterContainer/VBoxContainer/ShuffleRow/BuyShuffleButton")
 @onready var extra_life_button = get_node("CenterContainer/VBoxContainer/ExtraLifeRow/BuyExtraLifeButton")
 
 @onready var bomb_price_label = get_node("CenterContainer/VBoxContainer/BombRow/BombPriceLabel")
-@onready var rocket_price_label = get_node("CenterContainer/VBoxContainer/RocketRow/RocketPriceLabel")
+@onready var harpoon_price_label = get_node("CenterContainer/VBoxContainer/HarpoonRow/HarpoonPriceLabel")
 @onready var shuffle_price_label = get_node("CenterContainer/VBoxContainer/ShuffleRow/ShufflePriceLabel")
 @onready var extra_life_price_label = get_node("CenterContainer/VBoxContainer/ExtraLifeRow/ExtraLifePriceLabel")
 
@@ -19,12 +19,12 @@ var _confirmation_timer: float = 0.0
 
 func _ready():
 	bomb_price_label.text = str(Settings.bomb_price) + " coins"
-	rocket_price_label.text = str(Settings.rocket_price) + " coins"
+	harpoon_price_label.text = str(Settings.harpoon_price) + " coins"
 	shuffle_price_label.text = str(Settings.shuffle_price) + " coins"
 	extra_life_price_label.text = str(Settings.extra_life_price) + " coins"
 
 	bomb_button.pressed.connect(_on_buy_pressed.bind("bomb"))
-	rocket_button.pressed.connect(_on_buy_pressed.bind("rocket"))
+	harpoon_button.pressed.connect(_on_buy_pressed.bind("harpoon"))
 	shuffle_button.pressed.connect(_on_buy_pressed.bind("shuffle"))
 	extra_life_button.pressed.connect(_on_buy_pressed.bind("extra_life"))
 	back_button.pressed.connect(_on_back_pressed)
@@ -53,7 +53,7 @@ func update_affordability():
 	coin_label.text = str(GameStore.coins)
 
 	bomb_button.disabled = GameStore.coins < Settings.bomb_price
-	rocket_button.disabled = GameStore.coins < Settings.rocket_price
+	harpoon_button.disabled = GameStore.coins < Settings.harpoon_price
 	shuffle_button.disabled = GameStore.coins < Settings.shuffle_price
 	extra_life_button.disabled = GameStore.coins < Settings.extra_life_price
 
@@ -61,8 +61,8 @@ func _get_price(item_type: String) -> int:
 	match item_type:
 		"bomb":
 			return Settings.bomb_price
-		"rocket":
-			return Settings.rocket_price
+		"harpoon":
+			return Settings.harpoon_price
 		"shuffle":
 			return Settings.shuffle_price
 		"extra_life":

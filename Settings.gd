@@ -19,7 +19,7 @@ var bonus_tile_threshold = 10
 
 # Shop prices
 var bomb_price = 100
-var rocket_price = 250
+var harpoon_price = 250
 var shuffle_price = 500
 var extra_life_price = 1000
 

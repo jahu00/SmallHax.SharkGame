@@ -23,6 +23,9 @@ func on_scene_changing(scene_enum):
 		Scenes.SceneEnum.SpinningWheel:
 			var scene = Scenes.SpinningWheel.instantiate()
 			add_child(scene)
+		Scenes.SceneEnum.SettingsMenu:
+			var scene = Scenes.SettingsMenu.instantiate()
+			add_child(scene)
 
 func clear_scene():
 	for child in get_children():

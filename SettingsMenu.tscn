@@ -1,0 +1,61 @@
+[gd_scene format=3]
+
+[ext_resource type="FontFile" path="res://ScoreFont.tres" id="2"]
+[ext_resource type="Texture2D" uid="uid://dj3txg7weleny" path="res://assets/ingame.png" id="2_c0ofq"]
+[ext_resource type="Script" path="res://SettingsMenu.gd" id="3"]
+
+[node name="SettingsMenu" type="Node2D"]
+script = ExtResource("3")
+
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("2_c0ofq")
+centered = false
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+offset_right = 720.0
+offset_bottom = 1280.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="TitleLabel" type="Label" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(600, 60)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2")
+text = "Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ResetRow" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(600, 50)
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="ResetLabel" type="Label" parent="CenterContainer/VBoxContainer/ResetRow"]
+custom_minimum_size = Vector2(300, 50)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2")
+text = "Erase all progress"
+vertical_alignment = 1
+
+[node name="ResetButton" type="Button" parent="CenterContainer/VBoxContainer/ResetRow"]
+custom_minimum_size = Vector2(280, 50)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2")
+text = "Reset Game Data"
+
+[node name="ConfirmationLabel" type="Label" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(600, 40)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BackButton" type="Button" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(360, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2")
+text = "Back"

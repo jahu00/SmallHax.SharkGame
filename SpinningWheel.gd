@@ -3,7 +3,7 @@ extends Node2D
 const PRIZES = [
 	{"type": "nothing", "amount": 0},
 	{"type": "bomb", "amount": 1},
-	{"type": "rocket", "amount": 1},
+	{"type": "harpoon", "amount": 1},
 	{"type": "bomb", "amount": 2},
 	{"type": "shuffle", "amount": 1},
 	{"type": "bomb", "amount": 3},
@@ -47,7 +47,7 @@ func _draw_wheel_segments():
 	var colors = [
 		Color(0.6, 0.6, 0.6),   # 0: Nothing - gray
 		Color(0.9, 0.3, 0.3),   # 1: 1x Bomb - red
-		Color(0.3, 0.5, 0.9),   # 2: 1x Rocket - blue
+		Color(0.3, 0.5, 0.9),   # 2: 1x Harpoon - blue
 		Color(0.9, 0.4, 0.4),   # 3: 2x Bomb - light red
 		Color(0.3, 0.9, 0.5),   # 4: 1x Shuffle - green
 		Color(0.8, 0.2, 0.2),   # 5: 3x Bomb - dark red
@@ -57,7 +57,7 @@ func _draw_wheel_segments():
 	]
 
 	var labels = [
-		"Nothing", "1x Bomb", "1x Rocket", "2x Bomb",
+		"Nothing", "1x Bomb", "1x Harpoon", "2x Bomb",
 		"1x Shuffle", "3x Bomb", "1x Extra Life", "1000 Coins", "3x Bomb"
 	]
 
@@ -175,8 +175,8 @@ func _get_prize_display_text(prize: Dictionary) -> String:
 			return "Won " + str(prize.amount) + " coins!"
 		"bomb":
 			return "Won " + str(prize.amount) + "x Bomb!"
-		"rocket":
-			return "Won " + str(prize.amount) + "x Rocket!"
+		"harpoon":
+			return "Won " + str(prize.amount) + "x Harpoon!"
 		"shuffle":
 			return "Won " + str(prize.amount) + "x Shuffle!"
 		"extra_life":

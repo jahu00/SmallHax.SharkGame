@@ -31,7 +31,7 @@ func _ready():
 	game_over_button.pressed.connect(on_game_over_button_pressed)
 	menu_button.pressed.connect(on_menu_button_pressed)
 	powerup_bar.bomb_activated.connect(on_bomb_activated)
-	powerup_bar.rocket_activated.connect(on_rocket_activated)
+	powerup_bar.harpoon_activated.connect(on_harpoon_activated)
 	powerup_bar.shuffle_activated.connect(on_shuffle_activated)
 	init()
 
@@ -136,8 +136,8 @@ func on_tile_clicked(tile):
 	if (state == "PowerupTarget"):
 		if active_powerup == "bomb":
 			execute_bomb(tile.data.x, tile.data.y)
-		elif active_powerup == "rocket":
-			execute_rocket(tile.data.x)
+		elif active_powerup == "harpoon":
+			execute_harpoon(tile.data.x)
 		return
 
 	if (state == "PlayerMove"):
@@ -422,19 +422,19 @@ func execute_bomb(cx: int, cy: int):
 	update_powerup_bar()
 	destroy_tiles(bomb_targets)
 
-func on_rocket_activated():
-	if state == "PowerupTarget" and active_powerup == "rocket":
-		# Re-pressing rocket button cancels targeting
+func on_harpoon_activated():
+	if state == "PowerupTarget" and active_powerup == "harpoon":
+		# Re-pressing harpoon button cancels targeting
 		cancel_powerup_targeting()
 		return
 	if state != "PlayerMove":
 		return
 	deselect_tiles()
 	state = "PowerupTarget"
-	active_powerup = "rocket"
+	active_powerup = "harpoon"
 	update_powerup_bar()
 
-func execute_rocket(column_x: int):
+func execute_harpoon(column_x: int):
 	var tiles = get_tiles()
 	var column_tiles = []
 	for tile in tiles:
@@ -448,7 +448,7 @@ func execute_rocket(column_x: int):
 	var tile_count = column_tiles.size()
 	var points = tile_count * tile_count * Settings.tile_point
 	add_score(points)
-	GameStore.use_powerup("rocket")
+	GameStore.use_powerup("harpoon")
 	active_powerup = ""
 	update_powerup_bar()
 	destroy_tiles(column_tiles)

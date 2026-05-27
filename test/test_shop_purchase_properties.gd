@@ -38,7 +38,7 @@ func _ready():
 # --- Helper Functions (Generators) ---
 
 func rand_powerup_type() -> String:
-	var types = ["bomb", "rocket", "shuffle", "extra_life"]
+	var types = ["bomb", "harpoon", "shuffle", "extra_life"]
 	return types[randi() % types.size()]
 
 
@@ -46,8 +46,8 @@ func rand_price_for_type(type: String) -> int:
 	match type:
 		"bomb":
 			return Settings.bomb_price
-		"rocket":
-			return Settings.rocket_price
+		"harpoon":
+			return Settings.harpoon_price
 		"shuffle":
 			return Settings.shuffle_price
 		"extra_life":
@@ -82,7 +82,7 @@ func rand_any_balance() -> int:
 
 func rand_any_price() -> int:
 	# Pick a random shop price from the available items
-	var prices = [Settings.bomb_price, Settings.rocket_price, Settings.shuffle_price, Settings.extra_life_price]
+	var prices = [Settings.bomb_price, Settings.harpoon_price, Settings.shuffle_price, Settings.extra_life_price]
 	return prices[randi() % prices.size()]
 
 

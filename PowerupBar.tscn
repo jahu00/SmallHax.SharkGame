@@ -14,10 +14,10 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Bomb (0)"
 
-[node name="RocketButton" type="Button" parent="."]
+[node name="HarpoonButton" type="Button" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Rocket (0)"
+text = "Harpoon (0)"
 
 [node name="ShuffleButton" type="Button" parent="."]
 layout_mode = 2

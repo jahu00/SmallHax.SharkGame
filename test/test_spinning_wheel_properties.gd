@@ -18,7 +18,7 @@ const MAX_POWERUP = 99
 const EXPECTED_PRIZES = [
 	{"type": "nothing", "amount": 0},
 	{"type": "bomb", "amount": 1},
-	{"type": "rocket", "amount": 1},
+	{"type": "harpoon", "amount": 1},
 	{"type": "bomb", "amount": 2},
 	{"type": "shuffle", "amount": 1},
 	{"type": "bomb", "amount": 3},

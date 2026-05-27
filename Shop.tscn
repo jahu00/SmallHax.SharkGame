@@ -74,26 +74,26 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("2")
 text = "Buy"
 
-[node name="RocketRow" type="HBoxContainer" parent="CenterContainer/VBoxContainer" unique_id=709742724]
+[node name="HarpoonRow" type="HBoxContainer" parent="CenterContainer/VBoxContainer" unique_id=709742724]
 custom_minimum_size = Vector2(600, 50)
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="RocketNameLabel" type="Label" parent="CenterContainer/VBoxContainer/RocketRow" unique_id=948404862]
+[node name="HarpoonNameLabel" type="Label" parent="CenterContainer/VBoxContainer/HarpoonRow" unique_id=948404862]
 custom_minimum_size = Vector2(180, 50)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2")
-text = "Rocket"
+text = "Harpoon"
 vertical_alignment = 1
 
-[node name="RocketPriceLabel" type="Label" parent="CenterContainer/VBoxContainer/RocketRow" unique_id=1473537387]
+[node name="HarpoonPriceLabel" type="Label" parent="CenterContainer/VBoxContainer/HarpoonRow" unique_id=1473537387]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2")
 text = "250 coins"
 vertical_alignment = 1
 
-[node name="BuyRocketButton" type="Button" parent="CenterContainer/VBoxContainer/RocketRow" unique_id=177017534]
+[node name="BuyHarpoonButton" type="Button" parent="CenterContainer/VBoxContainer/HarpoonRow" unique_id=177017534]
 custom_minimum_size = Vector2(120, 50)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2")
