@@ -14,7 +14,7 @@ var tile_point = 5
 
 # Economy
 var coins_per_level = 50
-var bonus_to_coins_coefficient = 0.5
+var bonus_to_coins_coefficient = 50
 var bonus_tile_threshold = 10
 
 # Shop prices

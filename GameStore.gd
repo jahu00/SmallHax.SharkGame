@@ -106,7 +106,7 @@ func award_game_over_coins():
 
 func award_bonus_coins(remaining_tiles: int, bonus_points: int):
 	if remaining_tiles <= Settings.bonus_tile_threshold:
-		var bonus_coins = int(floor(bonus_points * Settings.bonus_to_coins_coefficient))
+		var bonus_coins = int(floor((Settings.bonus_tile_threshold - remaining_tiles) * Settings.bonus_to_coins_coefficient))
 		add_coins(bonus_coins)
 
 func reset_all_data():

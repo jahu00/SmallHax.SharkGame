@@ -1,15 +1,16 @@
 extends Control
 
 @onready var tile_layer = find_child("TileLayer")
-@onready var score_label = get_node("UpperPanel/HBoxContainer/VBoxContainer/FrameContainer2/ScoreLabel")
-@onready var next_label = get_node("UpperPanel/HBoxContainer/VBoxContainer2/MarginContainer/NextLabel")
-@onready var level_label = get_node("UpperPanel/MarginContainer/LevelLabel")
-@onready var bonus_container = get_node("UpperPanel/BonusContainer")
-@onready var gold_panel = get_node("UpperPanel/GoldPanel")
-@onready var game_over_container = get_node("GameOverContainer")
-@onready var game_over_button = get_node("GameOverContainer/GameOverButton")
-@onready var menu_button = get_node("LowerPanel/HBoxContainer/MenuButton")
-@onready var powerup_bar = get_node("LowerPanel/PowerupBar")
+@onready var score_label = find_child("ScoreLabel")
+@onready var next_label = find_child("NextLabel")
+@onready var level_label = find_child("LevelLabel")
+@onready var bonus_container = find_child("BonusContainer")
+@onready var gold_panel = find_child("GoldPanel")
+@onready var game_over_container = find_child("GameOverContainer")
+@onready var give_up_button = find_child("GiveUpButton")
+@onready var retry_button = find_child("RetryButton")
+@onready var menu_button = find_child("MenuButton")
+@onready var powerup_bar = find_child("PowerupBar")
 
 var selected_tiles = []
 var tiles_to_destroy = []
@@ -28,7 +29,8 @@ var extra_life_timer: float = 0.0
 var extra_life_showing: bool = false
 
 func _ready():
-	game_over_button.pressed.connect(on_game_over_button_pressed)
+	give_up_button.pressed.connect(on_game_over_button_pressed)
+	retry_button.pressed.connect(Global.new_game)
 	menu_button.pressed.connect(on_menu_button_pressed)
 	powerup_bar.bomb_activated.connect(on_bomb_activated)
 	powerup_bar.harpoon_activated.connect(on_harpoon_activated)
@@ -374,7 +376,7 @@ func hide_extra_life_label():
 
 func update_powerup_bar():
 	powerup_bar.update_counts()
-	powerup_bar.set_buttons_enabled(state)
+	powerup_bar.set_buttons_enabled(state, active_powerup)
 
 func update_coin_display():
 	gold_panel.update_coins()

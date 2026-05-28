@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://dqomnw5rwtlx0"]
+
+[ext_resource type="Script" uid="uid://cmmvisowhky1r" path="res://PowerButton.gd" id="2_fuaa5"]
+
+[node name="PowerButton" type="Button" unique_id=1396069931]
+custom_minimum_size = Vector2(72, 72)
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("2_fuaa5")
+
+[node name="PowerCount" type="Label" parent="." unique_id=1203737062]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -28.0
+offset_top = -22.0
+offset_right = -4.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 14
+text = "0"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="PowerIndicator" type="ReferenceRect" parent="." unique_id=486595614]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+border_color = Color(0, 1, 0, 1)
+border_width = 2.0
+editor_only = false
