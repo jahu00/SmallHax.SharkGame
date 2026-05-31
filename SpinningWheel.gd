@@ -35,12 +35,18 @@ var _icon_sprites: Array = []
 
 func _ready():
 	_load_reward_textures()
-	spin_cost_label.text = "Cost: " + str(Settings.spin_cost) + " coins"
+	spin_cost_label.text = tr("SPIN_COST") % Settings.spin_cost
 	spin_button.pressed.connect(_on_spin_pressed)
 	back_button.pressed.connect(_on_back_pressed)
+	_update_texts()
 	_update_coin_display()
 	_update_spin_affordability()
 	_draw_wheel_segments()
+
+func _update_texts():
+	spin_button.text = tr("SPIN_BUTTON")
+	back_button.text = tr("SPIN_BACK")
+	get_node("CenterContainer/VBoxContainer/PanelContainer/TitleLabel").text = tr("SPIN_TITLE")
 
 func _load_reward_textures():
 	_reward_textures = {
@@ -202,15 +208,15 @@ func get_prize(index: int) -> Dictionary:
 func _get_prize_display_text(prize: Dictionary) -> String:
 	match prize.type:
 		"nothing":
-			return "Nothing! Better luck next time."
+			return tr("SPIN_NOTHING")
 		"bomb":
-			return "Won " + str(prize.amount) + "x Bomb!"
+			return tr("SPIN_WON") % [prize.amount, tr("POWERUP_BOMB")]
 		"harpoon":
-			return "Won " + str(prize.amount) + "x Harpoon!"
+			return tr("SPIN_WON") % [prize.amount, tr("POWERUP_HARPOON")]
 		"shuffle":
-			return "Won " + str(prize.amount) + "x Shuffle!"
+			return tr("SPIN_WON") % [prize.amount, tr("POWERUP_SHUFFLE")]
 		"extra_life":
-			return "Won " + str(prize.amount) + "x Extra Life!"
+			return tr("SPIN_WON") % [prize.amount, tr("POWERUP_EXTRA_LIFE")]
 	return ""
 
 func _on_back_pressed():

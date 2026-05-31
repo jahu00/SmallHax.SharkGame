@@ -1,11 +1,12 @@
 extends MarginContainer
 
 @onready var bonus_label = get_node("HBoxContainer/BonusLabel")
+@onready var bonus_title_label = get_node("HBoxContainer/Label")
 var disappear_speed = 0.25
 
 
 func _ready():
-	pass
+	bonus_title_label.text = tr("GAME_BONUS")
 
 func show_bonus(value):
 	bonus_label.display_value = 0

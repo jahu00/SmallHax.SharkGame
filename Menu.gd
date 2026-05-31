@@ -15,7 +15,16 @@ func _ready():
 	shop_button.pressed.connect(_on_shop_pressed)
 	spinning_wheel_button.pressed.connect(_on_spinning_wheel_pressed)
 	settings_button.pressed.connect(_on_settings_pressed)
+	_update_texts()
 	_update_coin_display()
+
+func _update_texts():
+	continue_button.text = tr("MENU_CONTINUE")
+	new_game_button.text = tr("MENU_NEW_GAME")
+	shop_button.text = tr("MENU_SHOP")
+	spinning_wheel_button.text = tr("MENU_SPIN_THE_WHEEL")
+	settings_button.text = tr("MENU_SETTINGS")
+	exit_button.text = tr("MENU_EXIT")
 
 func _on_new_game_pressed():
 	Global.new_game()

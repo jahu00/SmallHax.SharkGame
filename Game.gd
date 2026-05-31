@@ -35,7 +35,19 @@ func _ready():
 	powerup_bar.bomb_activated.connect(on_bomb_activated)
 	powerup_bar.harpoon_activated.connect(on_harpoon_activated)
 	powerup_bar.shuffle_activated.connect(on_shuffle_activated)
+	_update_texts()
 	init()
+
+func _update_texts():
+	give_up_button.text = tr("GAME_GIVE_UP")
+	retry_button.text = tr("GAME_RETRY")
+	menu_button.text = tr("GAME_MENU")
+	var score_title = find_child("Label2")
+	if score_title:
+		score_title.text = tr("GAME_SCORE")
+	var next_title = find_child("Label3")
+	if next_title:
+		next_title.text = tr("GAME_NEXT")
 
 func init():
 	populate_board()
@@ -333,7 +345,7 @@ func add_score(points):
 
 func update_level():
 	next_label.text = str(GameStore.data.next)
-	level_label.text = "Level " + str(GameStore.data.level)
+	level_label.text = tr("GAME_LEVEL") % GameStore.data.level
 	update_score()
 
 func update_score():
@@ -370,7 +382,7 @@ func show_extra_life_used():
 		extra_life_label.add_theme_font_size_override("font_size", 48)
 		extra_life_label.add_theme_color_override("font_color", Color(0, 1, 0.5))
 		add_child(extra_life_label)
-	extra_life_label.text = "Extra Life! (%d remaining)" % remaining
+	extra_life_label.text = tr("GAME_EXTRA_LIFE") % remaining
 	extra_life_label.visible = true
 
 func hide_extra_life_label():

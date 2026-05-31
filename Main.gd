@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 func _ready():
 	Global.scene_changing.connect(on_scene_changing)

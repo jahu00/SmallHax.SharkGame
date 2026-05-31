@@ -37,6 +37,10 @@ ui_click={
 ]
 }
 
+[internationalization]
+
+locale/translations=PackedStringArray("res://translations/translations.en.translation", "res://translations/translations.pl.translation", "res://translations/translations.es.translation", "res://translations/translations.de.translation", "res://translations/translations.fr.translation")
+
 [mono]
 
 project/assembly_name="SharkGame"

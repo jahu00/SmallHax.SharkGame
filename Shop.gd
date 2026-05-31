@@ -13,6 +13,13 @@ extends Control
 @onready var shuffle_price_label = find_child("ShufflePriceLabel")
 @onready var extra_life_price_label = find_child("ExtraLifePriceLabel")
 
+@onready var bomb_name_label = find_child("BombNameLabel")
+@onready var harpoon_name_label = find_child("HarpoonNameLabel")
+@onready var shuffle_name_label = find_child("ShuffleNameLabel")
+@onready var extra_life_name_label = find_child("ExtraLifeNameLabel")
+
+@onready var title_label = find_child("TitleLabel")
+
 @onready var confirmation_label = find_child("ConfirmationLabel")
 
 @onready var bomb_power_button = find_child("BombPowerButton")
@@ -35,30 +42,30 @@ var _pirate_text_timer: float = 0.0
 var _pirate_idle_timer: float = 0.0
 var _pirate_is_speaking: bool = false
 
-var _greetings: Array[String] = [
-	"Ahoy, matey!",
-	"Welcome aboard!",
-	"What'll it be today?",
-	"Back for more, eh?",
-	"Step right up!",
+var _greetings_keys: Array[String] = [
+	"PIRATE_GREET_1",
+	"PIRATE_GREET_2",
+	"PIRATE_GREET_3",
+	"PIRATE_GREET_4",
+	"PIRATE_GREET_5",
 ]
 
-var _idle_lines: Array[String] = [
-	"Take yer time...",
-	"What treasury be ye after?",
-	"Fine goods, fair prices!",
-	"Don't be shy now.",
-	"I got all day, matey.",
-	"See anything\nye fancy?",
+var _idle_lines_keys: Array[String] = [
+	"PIRATE_IDLE_1",
+	"PIRATE_IDLE_2",
+	"PIRATE_IDLE_3",
+	"PIRATE_IDLE_4",
+	"PIRATE_IDLE_5",
+	"PIRATE_IDLE_6",
 ]
 
-var _purchase_lines: Array[String] = [
-	"Excellent choice!",
-	"Ye won't regret that!",
-	"A wise investment!",
-	"Good pick, matey!",
-	"That'll serve ye well!",
-	"Pleasure doin' business!",
+var _purchase_lines_keys: Array[String] = [
+	"PIRATE_BUY_1",
+	"PIRATE_BUY_2",
+	"PIRATE_BUY_3",
+	"PIRATE_BUY_4",
+	"PIRATE_BUY_5",
+	"PIRATE_BUY_6",
 ]
 
 func _ready():
@@ -73,11 +80,24 @@ func _ready():
 	extra_life_button.pressed.connect(_on_buy_pressed.bind("extra_life"))
 	back_button.pressed.connect(_on_back_pressed)
 
+	_update_texts()
 	update_affordability()
 	update_powerup_counts()
 
 	# Pirate greets the player on shop open
-	_pirate_say(_greetings.pick_random())
+	_pirate_say(tr(_greetings_keys.pick_random()))
+
+func _update_texts():
+	title_label.text = tr("SHOP_TITLE")
+	bomb_name_label.text = tr("SHOP_BOMB")
+	harpoon_name_label.text = tr("SHOP_HARPOON")
+	shuffle_name_label.text = tr("SHOP_SHUFFLE")
+	extra_life_name_label.text = tr("SHOP_EXTRA_LIFE")
+	bomb_button.text = tr("SHOP_BUY")
+	harpoon_button.text = tr("SHOP_BUY")
+	shuffle_button.text = tr("SHOP_BUY")
+	extra_life_button.text = tr("SHOP_BUY")
+	back_button.text = tr("SHOP_BACK")
 
 func _process(delta):
 	if _confirmation_timer > 0.0:
@@ -95,7 +115,7 @@ func _process(delta):
 	if not _pirate_is_speaking:
 		_pirate_idle_timer += delta
 		if _pirate_idle_timer >= pirate_idle_delay:
-			_pirate_say(_idle_lines.pick_random())
+			_pirate_say(tr(_idle_lines_keys.pick_random()))
 
 	gold_panel.update_coins()
 
@@ -108,7 +128,7 @@ func _on_buy_pressed(item_type: String):
 		update_powerup_counts()
 		# Pirate comments on purchase (only if not already speaking)
 		if not _pirate_is_speaking:
-			_pirate_say(_purchase_lines.pick_random())
+			_pirate_say(tr(_purchase_lines_keys.pick_random()))
 
 func _on_back_pressed():
 	Global.change_scene_to_file(Scenes.SceneEnum.Menu)
@@ -134,9 +154,21 @@ func _get_price(item_type: String) -> int:
 	return 0
 
 func _show_confirmation(item_type: String):
-	var display_name = item_type.replace("_", " ").capitalize()
-	confirmation_label.text = "Purchased " + display_name + "!"
+	var display_name = _get_item_display_name(item_type)
+	confirmation_label.text = tr("SHOP_PURCHASED") % display_name
 	_confirmation_timer = 2.0
+
+func _get_item_display_name(item_type: String) -> String:
+	match item_type:
+		"bomb":
+			return tr("SHOP_BOMB")
+		"harpoon":
+			return tr("SHOP_HARPOON")
+		"shuffle":
+			return tr("SHOP_SHUFFLE")
+		"extra_life":
+			return tr("SHOP_EXTRA_LIFE")
+	return item_type
 
 func update_powerup_counts():
 	bomb_power_button.count = GameStore.inventory["bomb"]

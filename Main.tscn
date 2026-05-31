@@ -2,5 +2,7 @@
 
 [ext_resource type="Script" uid="uid://st7kmtfq6q48" path="res://Main.gd" id="2"]
 
-[node name="Main" type="Node2D" unique_id=1047798942]
+[node name="Main" type="Control" unique_id=676419130]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("2")

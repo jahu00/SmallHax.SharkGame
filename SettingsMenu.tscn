@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://rjctkgb3yd2p"]
 
-[ext_resource type="FontFile" path="res://ScoreFont.tres" id="2"]
+[ext_resource type="FontFile" uid="uid://bwhktb8skjoks" path="res://ScoreFont.tres" id="2"]
 [ext_resource type="Texture2D" uid="uid://dj3txg7weleny" path="res://assets/ingame.png" id="2_c0ofq"]
 [ext_resource type="Script" uid="uid://b4uu0ver5gxf7" path="res://SettingsMenu.gd" id="3"]
 
@@ -30,6 +30,23 @@ theme_override_fonts/font = ExtResource("2")
 text = "Settings"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="LanguageRow" type="HBoxContainer" parent="CenterContainer/VBoxContainer" unique_id=1192409471]
+custom_minimum_size = Vector2(600, 50)
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="LanguageLabel" type="Label" parent="CenterContainer/VBoxContainer/LanguageRow" unique_id=976237771]
+custom_minimum_size = Vector2(300, 50)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2")
+text = "Language"
+vertical_alignment = 1
+
+[node name="LanguageOptionButton" type="OptionButton" parent="CenterContainer/VBoxContainer/LanguageRow" unique_id=2088242497]
+custom_minimum_size = Vector2(280, 50)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2")
 
 [node name="ResetRow" type="HBoxContainer" parent="CenterContainer/VBoxContainer" unique_id=821967289]
 custom_minimum_size = Vector2(600, 50)
