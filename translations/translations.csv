@@ -24,6 +24,7 @@ SHOP_BACK,Back,Wróć,Volver,Zurück,Retour,戻る
 SHOP_PURCHASED,Purchased %s!,Kupiono %s!,¡%s comprado!,%s gekauft!,%s acheté!,%sを購入！
 SPIN_TITLE,Spin the Wheel,Zakręć Kołem,Gira la Ruleta,Glücksrad drehen,Tourner la Roue,ルーレット
 SPIN_COST,Cost: %d coins,Koszt: %d monet,Coste: %d monedas,Kosten: %d Münzen,Coût: %d pièces,コスト: %dコイン
+SPIN_COST_LABEL,Cost:,Koszt:,Coste:,Kosten:,Coût:,コスト:
 SPIN_BUTTON,Spin!,Kręć!,¡Gira!,Drehen!,Tourner!,回す！
 SPIN_BACK,Back,Wróć,Volver,Zurück,Retour,戻る
 SPIN_NOTHING,Nothing! Better luck next time.,Nic! Może następnym razem.,¡Nada! Mejor suerte la próxima.,Nichts! Vielleicht nächstes Mal.,Rien! Meilleure chance la prochaine fois.,ハズレ！次はきっと当たる。

@@ -8,10 +8,10 @@ extends Control
 @onready var shuffle_button = find_child("BuyShuffleButton")
 @onready var extra_life_button = find_child("BuyExtraLifeButton")
 
-@onready var bomb_price_label = find_child("BombPriceLabel")
-@onready var harpoon_price_label = find_child("HarpoonPriceLabel")
-@onready var shuffle_price_label = find_child("ShufflePriceLabel")
-@onready var extra_life_price_label = find_child("ExtraLifePriceLabel")
+@onready var bomb_price_label = find_child("BombPriceContainer")
+@onready var harpoon_price_label = find_child("HarpoonPriceContainer")
+@onready var shuffle_price_label = find_child("ShufflePriceContainer")
+@onready var extra_life_price_label = find_child("ExtraLifePriceContainer")
 
 @onready var bomb_name_label = find_child("BombNameLabel")
 @onready var harpoon_name_label = find_child("HarpoonNameLabel")
@@ -69,10 +69,10 @@ var _purchase_lines_keys: Array[String] = [
 ]
 
 func _ready():
-	bomb_price_label.text = str(Settings.bomb_price)
-	harpoon_price_label.text = str(Settings.harpoon_price)
-	shuffle_price_label.text = str(Settings.shuffle_price)
-	extra_life_price_label.text = str(Settings.extra_life_price)
+	bomb_price_label.amount = Settings.bomb_price
+	harpoon_price_label.amount = Settings.harpoon_price
+	shuffle_price_label.amount = Settings.shuffle_price
+	extra_life_price_label.amount = Settings.extra_life_price
 
 	bomb_button.pressed.connect(_on_buy_pressed.bind("bomb"))
 	harpoon_button.pressed.connect(_on_buy_pressed.bind("harpoon"))

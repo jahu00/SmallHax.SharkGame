@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://c01npr1c3scn3"]
+
+[ext_resource type="FontFile" path="res://ScoreFont.tres" id="1"]
+[ext_resource type="Texture2D" uid="uid://biak3nkg7ydr0" path="res://assets/coin.png" id="2"]
+[ext_resource type="Script" uid="uid://c01npr1c3gd01" path="res://CoinPrice.gd" id="3"]
+
+[node name="CoinPrice" type="HBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
+theme_override_constants/separation = 6
+alignment = 1
+script = ExtResource("3")
+
+[node name="PriceLabel" type="Label" parent="."]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1")
+text = "0"
+vertical_alignment = 1
+
+[node name="CoinIcon" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("2")
+expand_mode = 1
+stretch_mode = 5

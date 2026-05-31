@@ -26,7 +26,8 @@ var _reward_textures: Dictionary = {}
 @onready var spin_button = get_node("CenterContainer/VBoxContainer/SpinButton")
 @onready var back_button = get_node("CenterContainer/VBoxContainer/BackButton")
 @onready var prize_result_label = get_node("CenterContainer/VBoxContainer/PrizeResultLabel")
-@onready var spin_cost_label = get_node("CenterContainer/VBoxContainer/SpinCostLabel")
+@onready var spin_cost_label = get_node("CenterContainer/VBoxContainer/SpinCostContainer/HBoxContainer/CostLabel")
+@onready var spin_cost_price = get_node("CenterContainer/VBoxContainer/SpinCostContainer/HBoxContainer/CoinPrice")
 @onready var wheel_node = get_node("CenterContainer/VBoxContainer/WheelContainer/WheelNode")
 
 var _is_spinning: bool = false
@@ -35,7 +36,8 @@ var _icon_sprites: Array = []
 
 func _ready():
 	_load_reward_textures()
-	spin_cost_label.text = tr("SPIN_COST") % Settings.spin_cost
+	spin_cost_label.text = tr("SPIN_COST_LABEL")
+	spin_cost_price.amount = Settings.spin_cost
 	spin_button.pressed.connect(_on_spin_pressed)
 	back_button.pressed.connect(_on_back_pressed)
 	_update_texts()

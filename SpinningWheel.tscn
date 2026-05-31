@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dw8p3llnvjbeu" path="res://assets/ship_background.png" id="2_artia"]
 [ext_resource type="Script" uid="uid://deohlc7xstvum" path="res://SpinningWheel.gd" id="3"]
 [ext_resource type="PackedScene" uid="uid://dg0ldpan3lscn" path="res://GoldPanel.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://c01npr1c3scn3" path="res://CoinPrice.tscn" id="6_coinprice"]
 
 [node name="SpinningWheel" type="Control" unique_id=546621545]
 layout_mode = 3
@@ -60,13 +61,23 @@ text = "▼"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SpinCostLabel" type="Label" parent="CenterContainer/VBoxContainer" unique_id=1947033464]
-custom_minimum_size = Vector2(500, 40)
+[node name="SpinCostContainer" type="CenterContainer" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(500, 50)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/SpinCostContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="CostLabel" type="Label" parent="CenterContainer/VBoxContainer/SpinCostContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2")
-text = "Cost: 100 coins"
-horizontal_alignment = 1
+text = "Cost:"
 vertical_alignment = 1
+
+[node name="CoinPrice" parent="CenterContainer/VBoxContainer/SpinCostContainer/HBoxContainer" instance=ExtResource("6_coinprice")]
+layout_mode = 2
+amount = 100
 
 [node name="SpinButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=305304099]
 custom_minimum_size = Vector2(360, 50)
