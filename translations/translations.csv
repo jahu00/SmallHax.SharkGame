@@ -17,8 +17,9 @@ GAME_BONUS,Bonus,Bonus,Bonus,Bonus,Bonus,ボーナス
 SHOP_TITLE,Shop,Sklep,Tienda,Laden,Boutique,ショップ
 SHOP_BOMB,Bomb,Bomba,Bomba,Bombe,Bombe,ボム
 SHOP_HARPOON,Harpoon,Harpun,Arpón,Harpune,Harpon,ハープーン
-SHOP_SHUFFLE,Shuffle,Tasowanie,Barajar,Mischen,Mélanger,シャッフル
+SHOP_SHUFFLE,Whirlpool,Wir,Remolino,Strudel,Tourbillon,うずしお
 SHOP_EXTRA_LIFE,Extra Life,Dodatkowe Życie,Vida Extra,Extraleben,Vie Supplémentaire,エクストラライフ
+SHOP_NET,Net,Sieć,Red,Netz,Filet,ネット
 SHOP_BUY,Buy,Kup,Comprar,Kaufen,Acheter,購入
 SHOP_BACK,Back,Wróć,Volver,Zurück,Retour,戻る
 SHOP_PURCHASED,Purchased %s!,Kupiono %s!,¡%s comprado!,%s gekauft!,%s acheté!,%sを購入！
@@ -55,5 +56,6 @@ PIRATE_BUY_5,That'll serve ye well!,To ci dobrze posłuży!,¡Te servirá bien!,
 PIRATE_BUY_6,Pleasure doin' business!,Przyjemność robić interesy!,¡Un placer hacer negocios!,Freut mich Geschäfte zu machen!,Plaisir de faire affaire!,毎度あり！
 POWERUP_BOMB,Bomb,Bomba,Bomba,Bombe,Bombe,ボム
 POWERUP_HARPOON,Harpoon,Harpun,Arpón,Harpune,Harpon,ハープーン
-POWERUP_SHUFFLE,Shuffle,Tasowanie,Barajar,Mischen,Mélanger,シャッフル
+POWERUP_SHUFFLE,Whirlpool,Wir,Remolino,Strudel,Tourbillon,うずしお
 POWERUP_EXTRA_LIFE,Extra Life,Dodatkowe Życie,Vida Extra,Extraleben,Vie Supplémentaire,エクストラライフ
+POWERUP_NET,Net,Sieć,Red,Netz,Filet,ネット

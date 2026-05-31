@@ -35,6 +35,7 @@ func _ready():
 	powerup_bar.bomb_activated.connect(on_bomb_activated)
 	powerup_bar.harpoon_activated.connect(on_harpoon_activated)
 	powerup_bar.shuffle_activated.connect(on_shuffle_activated)
+	powerup_bar.net_activated.connect(on_net_activated)
 	_update_texts()
 	Settings.apply_font(self)
 	init()
@@ -153,6 +154,8 @@ func on_tile_clicked(tile):
 			execute_bomb(tile.data.x, tile.data.y)
 		elif active_powerup == "harpoon":
 			execute_harpoon(tile.data.x)
+		elif active_powerup == "net":
+			execute_net(tile)
 		return
 
 	if (state == "PlayerMove"):
@@ -536,3 +539,24 @@ func execute_shuffle():
 			current_y -= 1
 	
 	state = "MoveTiles"
+
+# --- Net powerup ---
+
+func on_net_activated():
+	if state == "PowerupTarget" and active_powerup == "net":
+		cancel_powerup_targeting()
+		return
+	if state != "PlayerMove":
+		return
+	deselect_tiles()
+	state = "PowerupTarget"
+	active_powerup = "net"
+	update_powerup_bar()
+
+func execute_net(tile):
+	var points = get_tile_points(1)
+	add_score(points)
+	GameStore.use_powerup("net")
+	active_powerup = ""
+	update_powerup_bar()
+	destroy_tiles([tile])

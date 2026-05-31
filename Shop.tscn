@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://bvb1qqgwlnjbl" path="res://assets/shuffle.png" id="9_shuffle"]
 [ext_resource type="Texture2D" uid="uid://cd86spsspu2em" path="res://assets/extra_life.png" id="10_extralife"]
 [ext_resource type="PackedScene" uid="uid://c01npr1c3scn3" path="res://CoinPrice.tscn" id="11_coinprice"]
+[ext_resource type="Texture2D" uid="uid://b3e3cw004p21x" path="res://assets/net.png" id="12_net"]
 
 [node name="Shop" type="Control" unique_id=2000992995]
 layout_mode = 3
@@ -93,6 +94,33 @@ text = "Shop"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="NetRow" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(600, 50)
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="NetPowerButton" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/NetRow" instance=ExtResource("6_pwrbtn")]
+layout_mode = 2
+icon = ExtResource("12_net")
+show_outline = true
+
+[node name="NetNameLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/NetRow"]
+custom_minimum_size = Vector2(180, 50)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2")
+text = "Net"
+vertical_alignment = 1
+
+[node name="NetPriceContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/NetRow" instance=ExtResource("11_coinprice")]
+layout_mode = 2
+amount = 50
+
+[node name="BuyNetButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/NetRow"]
+custom_minimum_size = Vector2(120, 50)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2")
+text = "Buy"
+
 [node name="BombRow" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=981582069]
 custom_minimum_size = Vector2(600, 50)
 layout_mode = 2
@@ -161,7 +189,7 @@ show_outline = true
 custom_minimum_size = Vector2(180, 50)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2")
-text = "Shuffle"
+text = "Whirlpool"
 vertical_alignment = 1
 
 [node name="ShufflePriceContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ShuffleRow" instance=ExtResource("11_coinprice")]

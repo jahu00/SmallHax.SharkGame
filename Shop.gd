@@ -7,16 +7,19 @@ extends Control
 @onready var harpoon_button = find_child("BuyHarpoonButton")
 @onready var shuffle_button = find_child("BuyShuffleButton")
 @onready var extra_life_button = find_child("BuyExtraLifeButton")
+@onready var net_button = find_child("BuyNetButton")
 
 @onready var bomb_price_label = find_child("BombPriceContainer")
 @onready var harpoon_price_label = find_child("HarpoonPriceContainer")
 @onready var shuffle_price_label = find_child("ShufflePriceContainer")
 @onready var extra_life_price_label = find_child("ExtraLifePriceContainer")
+@onready var net_price_label = find_child("NetPriceContainer")
 
 @onready var bomb_name_label = find_child("BombNameLabel")
 @onready var harpoon_name_label = find_child("HarpoonNameLabel")
 @onready var shuffle_name_label = find_child("ShuffleNameLabel")
 @onready var extra_life_name_label = find_child("ExtraLifeNameLabel")
+@onready var net_name_label = find_child("NetNameLabel")
 
 @onready var title_label = find_child("TitleLabel")
 
@@ -26,6 +29,9 @@ extends Control
 @onready var harpoon_power_button = find_child("HarpoonPowerButton")
 @onready var shuffle_power_button = find_child("ShufflePowerButton")
 @onready var extra_life_power_button = find_child("ExtraLifePowerButton")
+@onready var net_power_button = find_child("NetPowerButton")
+
+@onready var extra_life_row = find_child("ExtraLifeRow")
 
 @onready var speach_bubble = find_child("Speach")
 @onready var speach_label = find_child("SpeachLabel")
@@ -73,12 +79,17 @@ func _ready():
 	harpoon_price_label.amount = Settings.harpoon_price
 	shuffle_price_label.amount = Settings.shuffle_price
 	extra_life_price_label.amount = Settings.extra_life_price
+	net_price_label.amount = Settings.net_price
 
 	bomb_button.pressed.connect(_on_buy_pressed.bind("bomb"))
 	harpoon_button.pressed.connect(_on_buy_pressed.bind("harpoon"))
 	shuffle_button.pressed.connect(_on_buy_pressed.bind("shuffle"))
 	extra_life_button.pressed.connect(_on_buy_pressed.bind("extra_life"))
+	net_button.pressed.connect(_on_buy_pressed.bind("net"))
 	back_button.pressed.connect(_on_back_pressed)
+
+	if Settings.hide_extra_life:
+		extra_life_row.visible = false
 
 	_update_texts()
 	Settings.apply_font(self)
@@ -94,10 +105,12 @@ func _update_texts():
 	harpoon_name_label.text = tr("SHOP_HARPOON")
 	shuffle_name_label.text = tr("SHOP_SHUFFLE")
 	extra_life_name_label.text = tr("SHOP_EXTRA_LIFE")
+	net_name_label.text = tr("SHOP_NET")
 	bomb_button.text = tr("SHOP_BUY")
 	harpoon_button.text = tr("SHOP_BUY")
 	shuffle_button.text = tr("SHOP_BUY")
 	extra_life_button.text = tr("SHOP_BUY")
+	net_button.text = tr("SHOP_BUY")
 	back_button.text = tr("SHOP_BACK")
 
 func _process(delta):
@@ -141,6 +154,7 @@ func update_affordability():
 	harpoon_button.disabled = GameStore.coins < Settings.harpoon_price
 	shuffle_button.disabled = GameStore.coins < Settings.shuffle_price
 	extra_life_button.disabled = GameStore.coins < Settings.extra_life_price
+	net_button.disabled = GameStore.coins < Settings.net_price
 
 func _get_price(item_type: String) -> int:
 	match item_type:
@@ -152,6 +166,8 @@ func _get_price(item_type: String) -> int:
 			return Settings.shuffle_price
 		"extra_life":
 			return Settings.extra_life_price
+		"net":
+			return Settings.net_price
 	return 0
 
 func _show_confirmation(item_type: String):
@@ -169,6 +185,8 @@ func _get_item_display_name(item_type: String) -> String:
 			return tr("SHOP_SHUFFLE")
 		"extra_life":
 			return tr("SHOP_EXTRA_LIFE")
+		"net":
+			return tr("SHOP_NET")
 	return item_type
 
 func update_powerup_counts():
@@ -176,6 +194,7 @@ func update_powerup_counts():
 	harpoon_power_button.count = GameStore.inventory["harpoon"]
 	shuffle_power_button.count = GameStore.inventory["shuffle"]
 	extra_life_power_button.count = GameStore.inventory["extra_life"]
+	net_power_button.count = GameStore.inventory["net"]
 
 # --- Pirate dialogue helpers ---
 

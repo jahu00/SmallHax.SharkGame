@@ -18,10 +18,14 @@ var bonus_to_coins_coefficient = 50
 var bonus_tile_threshold = 10
 
 # Shop prices
-var bomb_price = 100
-var harpoon_price = 250
-var shuffle_price = 500
-var extra_life_price = 1000
+var bomb_price = 250
+var harpoon_price = 500
+var shuffle_price = 1000
+var extra_life_price = 5000
+var net_price = 100
+
+# Powerup visibility
+var hide_extra_life = true
 
 # Spinning wheel
 var spin_cost = 100

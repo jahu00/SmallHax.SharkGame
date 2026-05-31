@@ -1,15 +1,6 @@
 extends Control
 
-const PRIZES = [
-	{"type": "nothing", "amount": 0},
-	{"type": "bomb", "amount": 1},
-	{"type": "nothing", "amount": 0},
-	{"type": "harpoon", "amount": 1},
-	{"type": "nothing", "amount": 0},
-	{"type": "shuffle", "amount": 1},
-	{"type": "nothing", "amount": 0},
-	{"type": "extra_life", "amount": 1},
-]
+var PRIZES = []
 
 const SEGMENT_COUNT = 8
 const SEGMENT_ANGLE = TAU / SEGMENT_COUNT
@@ -35,6 +26,7 @@ var _result_display_timer: float = 0.0
 var _icon_sprites: Array = []
 
 func _ready():
+	_init_prizes()
 	_load_reward_textures()
 	spin_cost_label.text = tr("SPIN_COST_LABEL")
 	spin_cost_price.amount = Settings.spin_cost
@@ -45,6 +37,19 @@ func _ready():
 	_update_coin_display()
 	_update_spin_affordability()
 	_draw_wheel_segments()
+
+func _init_prizes():
+	var last_prize = {"type": "net", "amount": 1} if Settings.hide_extra_life else {"type": "extra_life", "amount": 1}
+	PRIZES = [
+		{"type": "nothing", "amount": 0},
+		{"type": "bomb", "amount": 1},
+		{"type": "nothing", "amount": 0},
+		{"type": "harpoon", "amount": 1},
+		{"type": "nothing", "amount": 0},
+		{"type": "shuffle", "amount": 1},
+		{"type": "nothing", "amount": 0},
+		last_prize,
+	]
 
 func _update_texts():
 	spin_button.text = tr("SPIN_BUTTON")
@@ -57,6 +62,7 @@ func _load_reward_textures():
 		"harpoon": load("res://assets/harpoon.png"),
 		"shuffle": load("res://assets/shuffle.png"),
 		"extra_life": load("res://assets/extra_life.png"),
+		"net": load("res://assets/net.png"),
 		"nothing": null,
 	}
 
@@ -220,6 +226,8 @@ func _get_prize_display_text(prize: Dictionary) -> String:
 			return tr("SPIN_WON") % [prize.amount, tr("POWERUP_SHUFFLE")]
 		"extra_life":
 			return tr("SPIN_WON") % [prize.amount, tr("POWERUP_EXTRA_LIFE")]
+		"net":
+			return tr("SPIN_WON") % [prize.amount, tr("POWERUP_NET")]
 	return ""
 
 func _on_back_pressed():

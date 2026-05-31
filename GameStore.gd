@@ -4,7 +4,7 @@ var data
 
 # Persistent state (loaded on _ready, saved on change)
 var coins: int = 0
-var inventory: Dictionary = {"bomb": 0, "harpoon": 0, "shuffle": 0, "extra_life": 0}
+var inventory: Dictionary = {"bomb": 0, "harpoon": 0, "shuffle": 0, "extra_life": 0, "net": 0}
 
 const SAVE_PATH = "user://save_data.json"
 const MAX_COINS = 999_999_999
@@ -119,7 +119,7 @@ func _initialize_defaults():
 	_initialize_defaults_inventory()
 
 func _initialize_defaults_inventory():
-	inventory = {"bomb": 0, "harpoon": 0, "shuffle": 0, "extra_life": 0}
+	inventory = {"bomb": 0, "harpoon": 0, "shuffle": 0, "extra_life": 0, "net": 0}
 
 # --- Existing game session methods ---
 
