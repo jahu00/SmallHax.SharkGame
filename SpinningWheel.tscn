@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://yerluc0s4j17"]
 
 [ext_resource type="FontFile" path="res://ScoreFont.tres" id="2"]
-[ext_resource type="Texture2D" uid="uid://dj3txg7weleny" path="res://assets/ingame.png" id="2_artia"]
+[ext_resource type="Texture2D" uid="uid://dw8p3llnvjbeu" path="res://assets/ship_background.png" id="2_artia"]
 [ext_resource type="Script" uid="uid://deohlc7xstvum" path="res://SpinningWheel.gd" id="3"]
 [ext_resource type="PackedScene" uid="uid://dg0ldpan3lscn" path="res://GoldPanel.tscn" id="5"]
 
@@ -14,7 +14,7 @@ script = ExtResource("3")
 layout_mode = 0
 texture = ExtResource("2_artia")
 
-[node name="GoldPanel" parent="." instance=ExtResource("5")]
+[node name="GoldPanel" parent="." unique_id=1397932775 instance=ExtResource("5")]
 layout_mode = 0
 offset_left = 520.0
 offset_top = 20.0

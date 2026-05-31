@@ -3,17 +3,24 @@ extends Control
 const PRIZES = [
 	{"type": "nothing", "amount": 0},
 	{"type": "bomb", "amount": 1},
+	{"type": "nothing", "amount": 0},
 	{"type": "harpoon", "amount": 1},
-	{"type": "bomb", "amount": 2},
+	{"type": "nothing", "amount": 0},
 	{"type": "shuffle", "amount": 1},
-	{"type": "bomb", "amount": 3},
+	{"type": "nothing", "amount": 0},
 	{"type": "extra_life", "amount": 1},
-	{"type": "coins", "amount": 1000},
-	{"type": "bomb", "amount": 3},
 ]
 
-const SEGMENT_COUNT = 9
+const SEGMENT_COUNT = 8
 const SEGMENT_ANGLE = TAU / SEGMENT_COUNT
+
+# Reward icons — loaded once, reused per segment
+var _reward_textures: Dictionary = {}
+
+# Tuning variables for icon placement and rotation
+@export var icon_radius: float = 200.0          # Distance from center to icon
+@export var icon_angle_offset: float = 0 #0.5 * SEGMENT_ANGLE    # Angular offset for icon placement (radians)
+@export var icon_rotation_offset: float = 0 # Extra rotation applied to each icon (radians)
 
 @onready var gold_panel = get_node("GoldPanel")
 @onready var spin_button = get_node("CenterContainer/VBoxContainer/SpinButton")
@@ -24,14 +31,25 @@ const SEGMENT_ANGLE = TAU / SEGMENT_COUNT
 
 var _is_spinning: bool = false
 var _result_display_timer: float = 0.0
+var _icon_sprites: Array = []
 
 func _ready():
+	_load_reward_textures()
 	spin_cost_label.text = "Cost: " + str(Settings.spin_cost) + " coins"
 	spin_button.pressed.connect(_on_spin_pressed)
 	back_button.pressed.connect(_on_back_pressed)
 	_update_coin_display()
 	_update_spin_affordability()
 	_draw_wheel_segments()
+
+func _load_reward_textures():
+	_reward_textures = {
+		"bomb": load("res://assets/bomb.png"),
+		"harpoon": load("res://assets/harpoon.png"),
+		"shuffle": load("res://assets/shuffle.png"),
+		"extra_life": load("res://assets/extra_life.png"),
+		"nothing": null,
+	}
 
 func _process(delta):
 	if _result_display_timer > 0.0:
@@ -40,65 +58,74 @@ func _process(delta):
 			prize_result_label.text = ""
 			_update_spin_affordability()
 
+	# Counter-rotate icons so they stay upright while the wheel spins
+	# Each icon is a child of wheel_node, so its global rotation = wheel_node.rotation + sprite.rotation
+	# We want global rotation = 0 (upright), so sprite.rotation = -wheel_node.rotation
+	for sprite in _icon_sprites:
+		sprite.rotation = -wheel_node.rotation + icon_rotation_offset
+
 	gold_panel.update_coins()
 
 func _draw_wheel_segments():
-	# Draw 9 colored segments on the wheel node
-	var colors = [
-		Color(0.6, 0.6, 0.6),   # 0: Nothing - gray
-		Color(0.9, 0.3, 0.3),   # 1: 1x Bomb - red
-		Color(0.3, 0.5, 0.9),   # 2: 1x Harpoon - blue
-		Color(0.9, 0.4, 0.4),   # 3: 2x Bomb - light red
-		Color(0.3, 0.9, 0.5),   # 4: 1x Shuffle - green
-		Color(0.8, 0.2, 0.2),   # 5: 3x Bomb - dark red
-		Color(0.9, 0.9, 0.3),   # 6: 1x Extra Life - yellow
-		Color(0.9, 0.7, 0.1),   # 7: 1000 coins - gold
-		Color(0.8, 0.2, 0.2),   # 8: 3x Bomb - dark red
-	]
-
-	var labels = [
-		"Nothing", "1x Bomb", "1x Harpoon", "2x Bomb",
-		"1x Shuffle", "3x Bomb", "1x Extra Life", "1000 Coins", "3x Bomb"
-	]
-
 	var radius = 200.0
 
+	# Place the steering-wheel.png texture as the wheel background
+	var wheel_texture = load("res://assets/steering-wheel.png")
+	if wheel_texture:
+		var wheel_sprite = Sprite2D.new()
+		wheel_sprite.texture = wheel_texture
+		var tex_size = wheel_texture.get_size()
+		var desired_diameter = radius * 2.2
+		wheel_sprite.scale = Vector2(desired_diameter / tex_size.x, desired_diameter / tex_size.y)
+		wheel_node.add_child(wheel_sprite)
+
+	# Add reward icons in front of the wheel
 	for i in range(SEGMENT_COUNT):
-		var segment = _create_segment(i, radius, colors[i], labels[i])
-		wheel_node.add_child(segment)
+		var icon_node = _create_reward_icon(i, radius)
+		wheel_node.add_child(icon_node)
 
-func _create_segment(index: int, radius: float, color: Color, label_text: String) -> Node2D:
-	var segment = Node2D.new()
+func _create_reward_icon(index: int, _radius: float) -> Node2D:
+	var icon_container = Node2D.new()
 
-	# Create the colored polygon for this segment
-	var polygon = Polygon2D.new()
+	var prize = PRIZES[index]
+	var tex = _reward_textures.get(prize.type, null)
+
+	var mid_angle = index * SEGMENT_ANGLE + SEGMENT_ANGLE / 2.0 + icon_angle_offset
+	var icon_pos = Vector2(cos(mid_angle), sin(mid_angle)) * icon_radius
+
+	if tex:
+		# Draw a semi-transparent white circle behind the icon
+		var circle_bg = _create_circle_background(icon_pos)
+		icon_container.add_child(circle_bg)
+		_icon_sprites.append(circle_bg)
+
+		var sprite = Sprite2D.new()
+		sprite.texture = tex
+		# Scale icon to be prominent in the segment (target ~64x64 pixels)
+		var icon_size = 64.0
+		var tex_size = tex.get_size()
+		sprite.scale = Vector2(icon_size / tex_size.x, icon_size / tex_size.y)
+		sprite.position = icon_pos
+		# rotation = 0 means upright at start (wheel_node.rotation = 0)
+		sprite.rotation = 0
+		icon_container.add_child(sprite)
+		_icon_sprites.append(sprite)
+
+	return icon_container
+
+func _create_circle_background(pos: Vector2) -> Node2D:
+	# Create a white semi-transparent circle using a Polygon2D
+	var circle = Polygon2D.new()
 	var points: PackedVector2Array = PackedVector2Array()
-	points.append(Vector2.ZERO)
-
-	var start_angle = index * SEGMENT_ANGLE
-	var end_angle = (index + 1) * SEGMENT_ANGLE
-	var steps = 16
-	for s in range(steps + 1):
-		var angle = start_angle + (end_angle - start_angle) * s / steps
-		points.append(Vector2(cos(angle), sin(angle)) * radius)
-
-	polygon.polygon = points
-	polygon.color = color
-	segment.add_child(polygon)
-
-	# Add label at the midpoint of the segment
-	var mid_angle = start_angle + SEGMENT_ANGLE / 2.0
-	var label_pos = Vector2(cos(mid_angle), sin(mid_angle)) * (radius * 0.6)
-	var label = Label.new()
-	label.text = label_text
-	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	label.position = label_pos - Vector2(50, 10)
-	label.custom_minimum_size = Vector2(100, 20)
-	label.add_theme_font_size_override("font_size", 12)
-	segment.add_child(label)
-
-	return segment
+	var circle_radius = 40.0
+	var segments = 24
+	for i in range(segments):
+		var angle = TAU * i / segments
+		points.append(Vector2(cos(angle), sin(angle)) * circle_radius)
+	circle.polygon = points
+	circle.color = Color(1.0, 1.0, 1.0, 0.6)
+	circle.position = pos
+	return circle
 
 func _on_spin_pressed():
 	if _is_spinning:
@@ -134,8 +161,15 @@ func _start_spin_animation():
 	tween.tween_callback(_on_spin_animation_complete.bind(final_angle))
 
 func _on_spin_animation_complete(final_angle: float):
-	# Determine winning segment from final angle
-	var segment_index = int(floor(final_angle / SEGMENT_ANGLE))
+	# The pointer is at the top (angle = -PI/2 in Godot's coordinate system).
+	# After the wheel rotates by total_rotation, we need to find which segment
+	# is under the pointer. The wheel's final rotation = final_angle (mod TAU).
+	# The segment originally at angle A is now at angle (A + wheel_rotation).
+	# We want A + wheel_rotation ≡ -PI/2 (mod TAU), so A = -PI/2 - final_angle.
+	# Normalize to [0, TAU] and divide by SEGMENT_ANGLE to get the index.
+	var pointer_angle = -PI / 2.0
+	var segment_angle = fposmod(pointer_angle - final_angle, TAU)
+	var segment_index = int(floor(segment_angle / SEGMENT_ANGLE))
 	segment_index = clampi(segment_index, 0, SEGMENT_COUNT - 1)
 	_on_spin_complete(segment_index)
 
@@ -146,8 +180,6 @@ func _on_spin_complete(segment_index: int):
 	match prize.type:
 		"nothing":
 			pass
-		"coins":
-			GameStore.add_coins(prize.amount)
 		_:
 			GameStore.add_powerup(prize.type, prize.amount)
 
@@ -171,8 +203,6 @@ func _get_prize_display_text(prize: Dictionary) -> String:
 	match prize.type:
 		"nothing":
 			return "Nothing! Better luck next time."
-		"coins":
-			return "Won " + str(prize.amount) + " coins!"
 		"bomb":
 			return "Won " + str(prize.amount) + "x Bomb!"
 		"harpoon":

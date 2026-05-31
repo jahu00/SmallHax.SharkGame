@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://bkacaus4shkyl"]
 
 [ext_resource type="FontFile" path="res://ScoreFont.tres" id="2"]
-[ext_resource type="Texture2D" uid="uid://dj3txg7weleny" path="res://assets/ingame.png" id="2_c0ofq"]
+[ext_resource type="Texture2D" uid="uid://crnp01yiigly0" path="res://assets/shop.png" id="2_db8k6"]
 [ext_resource type="Script" uid="uid://cy4a5rggmhghn" path="res://Shop.gd" id="3"]
+[ext_resource type="Texture2D" uid="uid://cfsxjsf0lmigr" path="res://assets/pirate.png" id="3_6epge"]
+[ext_resource type="Texture2D" uid="uid://beed1imi7gq5e" path="res://assets/speach.png" id="4_cl6py"]
 [ext_resource type="PackedScene" uid="uid://dg0ldpan3lscn" path="res://GoldPanel.tscn" id="5"]
 [ext_resource type="PackedScene" uid="uid://dqomnw5rwtlx0" path="res://PowerButton.tscn" id="6_pwrbtn"]
 [ext_resource type="Texture2D" uid="uid://h8sdekf0hqym" path="res://assets/bomb.png" id="7_bomb"]
@@ -17,7 +19,41 @@ script = ExtResource("3")
 
 [node name="Background" type="TextureRect" parent="." unique_id=1719950030]
 layout_mode = 0
-texture = ExtResource("2_c0ofq")
+texture = ExtResource("2_db8k6")
+
+[node name="Pirate" type="TextureRect" parent="." unique_id=588735550]
+layout_mode = 0
+offset_left = -134.0
+offset_top = 232.0
+offset_right = 423.0
+offset_bottom = 1345.0
+texture = ExtResource("3_6epge")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Speach" type="TextureRect" parent="." unique_id=385021231]
+layout_mode = 0
+offset_left = 36.0
+offset_top = 25.0
+offset_right = 760.0
+offset_bottom = 596.0
+texture = ExtResource("4_cl6py")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SpeachLabel" type="Label" parent="Speach" unique_id=365122320]
+layout_mode = 0
+offset_left = 146.0
+offset_top = 84.0
+offset_right = 564.0
+offset_bottom = 381.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2")
+theme_override_font_sizes/font_size = 64
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
 
 [node name="GoldPanel" parent="." unique_id=1379510488 instance=ExtResource("5")]
 layout_mode = 0
@@ -27,16 +63,28 @@ offset_right = 700.0
 offset_bottom = 60.0
 
 [node name="CenterContainer" type="CenterContainer" parent="." unique_id=620593211]
+custom_minimum_size = Vector2(720, 0)
 layout_mode = 0
+offset_top = 640.0
 offset_right = 720.0
-offset_bottom = 1280.0
+offset_bottom = 1174.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=2091013285]
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer" unique_id=552531467]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer" unique_id=906802227]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer" unique_id=2091013285]
 custom_minimum_size = Vector2(600, 0)
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="TitleLabel" type="Label" parent="CenterContainer/VBoxContainer" unique_id=931161886]
+[node name="TitleLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=931161886]
 custom_minimum_size = Vector2(600, 60)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2")
@@ -44,131 +92,127 @@ text = "Shop"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="BombRow" type="HBoxContainer" parent="CenterContainer/VBoxContainer" unique_id=981582069]
+[node name="BombRow" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=981582069]
 custom_minimum_size = Vector2(600, 50)
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="BombPowerButton" parent="CenterContainer/VBoxContainer/BombRow" unique_id=1306967200 instance=ExtResource("6_pwrbtn")]
+[node name="BombPowerButton" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/BombRow" unique_id=1306967200 instance=ExtResource("6_pwrbtn")]
 layout_mode = 2
 icon = ExtResource("7_bomb")
-flat = true
 show_outline = true
 
-[node name="BombNameLabel" type="Label" parent="CenterContainer/VBoxContainer/BombRow" unique_id=299599436]
+[node name="BombNameLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/BombRow" unique_id=299599436]
 custom_minimum_size = Vector2(180, 50)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2")
 text = "Bomb"
 vertical_alignment = 1
 
-[node name="BombPriceLabel" type="Label" parent="CenterContainer/VBoxContainer/BombRow" unique_id=225641517]
+[node name="BombPriceLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/BombRow" unique_id=225641517]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2")
 text = "100 coins"
 vertical_alignment = 1
 
-[node name="BuyBombButton" type="Button" parent="CenterContainer/VBoxContainer/BombRow" unique_id=1313419683]
+[node name="BuyBombButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/BombRow" unique_id=1313419683]
 custom_minimum_size = Vector2(120, 50)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2")
 text = "Buy"
 
-[node name="HarpoonRow" type="HBoxContainer" parent="CenterContainer/VBoxContainer" unique_id=709742724]
+[node name="HarpoonRow" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=709742724]
 custom_minimum_size = Vector2(600, 50)
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="HarpoonPowerButton" parent="CenterContainer/VBoxContainer/HarpoonRow" unique_id=1792237786 instance=ExtResource("6_pwrbtn")]
+[node name="HarpoonPowerButton" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HarpoonRow" unique_id=1792237786 instance=ExtResource("6_pwrbtn")]
 layout_mode = 2
 icon = ExtResource("8_harpoon")
-flat = true
 show_outline = true
 
-[node name="HarpoonNameLabel" type="Label" parent="CenterContainer/VBoxContainer/HarpoonRow" unique_id=948404862]
+[node name="HarpoonNameLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HarpoonRow" unique_id=948404862]
 custom_minimum_size = Vector2(180, 50)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2")
 text = "Harpoon"
 vertical_alignment = 1
 
-[node name="HarpoonPriceLabel" type="Label" parent="CenterContainer/VBoxContainer/HarpoonRow" unique_id=1473537387]
+[node name="HarpoonPriceLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HarpoonRow" unique_id=1473537387]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2")
 text = "250 coins"
 vertical_alignment = 1
 
-[node name="BuyHarpoonButton" type="Button" parent="CenterContainer/VBoxContainer/HarpoonRow" unique_id=177017534]
+[node name="BuyHarpoonButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HarpoonRow" unique_id=177017534]
 custom_minimum_size = Vector2(120, 50)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2")
 text = "Buy"
 
-[node name="ShuffleRow" type="HBoxContainer" parent="CenterContainer/VBoxContainer" unique_id=892820313]
+[node name="ShuffleRow" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=892820313]
 custom_minimum_size = Vector2(600, 50)
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="ShufflePowerButton" parent="CenterContainer/VBoxContainer/ShuffleRow" unique_id=84381579 instance=ExtResource("6_pwrbtn")]
+[node name="ShufflePowerButton" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ShuffleRow" unique_id=84381579 instance=ExtResource("6_pwrbtn")]
 layout_mode = 2
 icon = ExtResource("9_shuffle")
-flat = true
 show_outline = true
 
-[node name="ShuffleNameLabel" type="Label" parent="CenterContainer/VBoxContainer/ShuffleRow" unique_id=113378213]
+[node name="ShuffleNameLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ShuffleRow" unique_id=113378213]
 custom_minimum_size = Vector2(180, 50)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2")
 text = "Shuffle"
 vertical_alignment = 1
 
-[node name="ShufflePriceLabel" type="Label" parent="CenterContainer/VBoxContainer/ShuffleRow" unique_id=77088481]
+[node name="ShufflePriceLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ShuffleRow" unique_id=77088481]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2")
 text = "500 coins"
 vertical_alignment = 1
 
-[node name="BuyShuffleButton" type="Button" parent="CenterContainer/VBoxContainer/ShuffleRow" unique_id=1853863247]
+[node name="BuyShuffleButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ShuffleRow" unique_id=1853863247]
 custom_minimum_size = Vector2(120, 50)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2")
 text = "Buy"
 
-[node name="ExtraLifeRow" type="HBoxContainer" parent="CenterContainer/VBoxContainer" unique_id=1372266691]
+[node name="ExtraLifeRow" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1372266691]
 custom_minimum_size = Vector2(600, 50)
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="ExtraLifePowerButton" parent="CenterContainer/VBoxContainer/ExtraLifeRow" unique_id=276583041 instance=ExtResource("6_pwrbtn")]
+[node name="ExtraLifePowerButton" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ExtraLifeRow" unique_id=276583041 instance=ExtResource("6_pwrbtn")]
 layout_mode = 2
 icon = ExtResource("10_extralife")
-flat = true
 show_outline = true
 
-[node name="ExtraLifeNameLabel" type="Label" parent="CenterContainer/VBoxContainer/ExtraLifeRow" unique_id=1050528084]
+[node name="ExtraLifeNameLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ExtraLifeRow" unique_id=1050528084]
 custom_minimum_size = Vector2(180, 50)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2")
 text = "Extra Life"
 vertical_alignment = 1
 
-[node name="ExtraLifePriceLabel" type="Label" parent="CenterContainer/VBoxContainer/ExtraLifeRow" unique_id=549475863]
+[node name="ExtraLifePriceLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ExtraLifeRow" unique_id=549475863]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2")
 text = "1000 coins"
 vertical_alignment = 1
 
-[node name="BuyExtraLifeButton" type="Button" parent="CenterContainer/VBoxContainer/ExtraLifeRow" unique_id=1287761129]
+[node name="BuyExtraLifeButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ExtraLifeRow" unique_id=1287761129]
 custom_minimum_size = Vector2(120, 50)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2")
 text = "Buy"
 
-[node name="ConfirmationLabel" type="Label" parent="CenterContainer/VBoxContainer" unique_id=955951512]
+[node name="ConfirmationLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=955951512]
 custom_minimum_size = Vector2(600, 40)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.2, 0.8, 0.2, 1)
@@ -176,7 +220,7 @@ theme_override_fonts/font = ExtResource("2")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="BackButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1105977064]
+[node name="BackButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1105977064]
 custom_minimum_size = Vector2(360, 50)
 layout_mode = 2
 size_flags_horizontal = 4
