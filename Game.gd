@@ -36,6 +36,7 @@ func _ready():
 	powerup_bar.harpoon_activated.connect(on_harpoon_activated)
 	powerup_bar.shuffle_activated.connect(on_shuffle_activated)
 	_update_texts()
+	Settings.apply_font(self)
 	init()
 
 func _update_texts():

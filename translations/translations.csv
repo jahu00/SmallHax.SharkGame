@@ -1,58 +1,58 @@
-keys,en,pl,es,de,fr
-MENU_CONTINUE,Continue,Kontynuuj,Continuar,Fortsetzen,Continuer
-MENU_NEW_GAME,New Game,Nowa Gra,Nuevo Juego,Neues Spiel,Nouvelle Partie
-MENU_SHOP,Shop,Sklep,Tienda,Laden,Boutique
-MENU_SPIN_THE_WHEEL,Spin the Wheel,Zakręć Kołem,Gira la Ruleta,Glücksrad drehen,Tourner la Roue
-MENU_SETTINGS,Settings,Ustawienia,Ajustes,Einstellungen,Paramètres
-MENU_EXIT,Exit,Wyjście,Salir,Beenden,Quitter
-GAME_LEVEL,Level %d,Poziom %d,Nivel %d,Level %d,Niveau %d
-GAME_SCORE,Score,Wynik,Puntos,Punkte,Score
-GAME_NEXT,Next,Następny,Siguiente,Nächstes,Suivant
-GAME_BEST,Best,Najlepszy,Mejor,Bester,Meilleur
-GAME_MENU,Menu,Menu,Menú,Menü,Menu
-GAME_GIVE_UP,Give up,Poddaj się,Rendirse,Aufgeben,Abandonner
-GAME_RETRY,Retry,Ponów,Reintentar,Wiederholen,Réessayer
-GAME_EXTRA_LIFE,Extra Life! (%d remaining),Dodatkowe Życie! (pozostało %d),¡Vida Extra! (%d restantes),Extraleben! (%d übrig),Vie Supplémentaire! (%d restantes)
-GAME_BONUS,Bonus,Bonus,Bonus,Bonus,Bonus
-SHOP_TITLE,Shop,Sklep,Tienda,Laden,Boutique
-SHOP_BOMB,Bomb,Bomba,Bomba,Bombe,Bombe
-SHOP_HARPOON,Harpoon,Harpun,Arpón,Harpune,Harpon
-SHOP_SHUFFLE,Shuffle,Tasowanie,Barajar,Mischen,Mélanger
-SHOP_EXTRA_LIFE,Extra Life,Dodatkowe Życie,Vida Extra,Extraleben,Vie Supplémentaire
-SHOP_BUY,Buy,Kup,Comprar,Kaufen,Acheter
-SHOP_BACK,Back,Wróć,Volver,Zurück,Retour
-SHOP_PURCHASED,Purchased %s!,Kupiono %s!,¡%s comprado!,%s gekauft!,%s acheté!
-SPIN_TITLE,Spin the Wheel,Zakręć Kołem,Gira la Ruleta,Glücksrad drehen,Tourner la Roue
-SPIN_COST,Cost: %d coins,Koszt: %d monet,Coste: %d monedas,Kosten: %d Münzen,Coût: %d pièces
-SPIN_BUTTON,Spin!,Kręć!,¡Gira!,Drehen!,Tourner!
-SPIN_BACK,Back,Wróć,Volver,Zurück,Retour
-SPIN_NOTHING,Nothing! Better luck next time.,Nic! Może następnym razem.,¡Nada! Mejor suerte la próxima.,Nichts! Vielleicht nächstes Mal.,Rien! Meilleure chance la prochaine fois.
-SPIN_WON,Won %dx %s!,Wygrano %dx %s!,¡Ganaste %dx %s!,%dx %s gewonnen!,%dx %s gagné!
-SETTINGS_TITLE,Settings,Ustawienia,Ajustes,Einstellungen,Paramètres
-SETTINGS_ERASE_PROGRESS,Erase all progress,Wymaż postęp,Borrar todo el progreso,Gesamten Fortschritt löschen,Effacer toute la progression
-SETTINGS_RESET_BUTTON,Reset Game Data,Resetuj Dane Gry,Restablecer Datos,Spieldaten zurücksetzen,Réinitialiser les Données
-SETTINGS_CONFIRM,Are you sure?,Jesteś pewien?,¿Estás seguro?,Bist du sicher?,Êtes-vous sûr?
-SETTINGS_CONFIRM_WARNING,This will erase all progress!,To usunie cały postęp!,¡Esto borrará todo el progreso!,Dies löscht den gesamten Fortschritt!,Cela effacera toute la progression!
-SETTINGS_RESET_DONE,Game data has been reset.,Dane gry zostały zresetowane.,Los datos se han restablecido.,Spieldaten wurden zurückgesetzt.,Les données ont été réinitialisées.
-SETTINGS_LANGUAGE,Language,Język,Idioma,Sprache,Langue
-PIRATE_GREET_1,Ahoy matey!,Ahoj kolego!,¡Ahoy marinero!,Ahoi Matrose!,Ohé matelot!
-PIRATE_GREET_2,Welcome aboard!,Witaj na pokładzie!,¡Bienvenido a bordo!,Willkommen an Bord!,Bienvenue à bord!
-PIRATE_GREET_3,What'll it be today?,Co dziś będzie?,¿Qué será hoy?,Was darf es heute sein?,Que sera-ce aujourd'hui?
-PIRATE_GREET_4,Back for more eh?,Wracasz po więcej?,¿Vuelves por más?,Zurück für mehr?,De retour pour plus?
-PIRATE_GREET_5,Step right up!,Podejdź śmiało!,¡Acércate!,Treten Sie näher!,Approchez!
-PIRATE_IDLE_1,Take yer time...,Nie spiesz się...,Tómate tu tiempo...,Lass dir Zeit...,Prends ton temps...
-PIRATE_IDLE_2,What treasury be ye after?,Jakiego skarbu szukasz?,¿Qué tesoro buscas?,Welchen Schatz suchst du?,Quel trésor cherches-tu?
-PIRATE_IDLE_3,Fine goods fair prices!,Dobre towary uczciwe ceny!,¡Buenos productos buen precio!,Gute Ware faire Preise!,Bons produits prix justes!
-PIRATE_IDLE_4,Don't be shy now.,Nie bądź nieśmiały.,No seas tímido.,Sei nicht schüchtern.,Ne sois pas timide.
-PIRATE_IDLE_5,I got all day matey.,Mam cały dzień kolego.,Tengo todo el día.,Ich hab den ganzen Tag.,J'ai toute la journée.
-PIRATE_IDLE_6,See anything\nye fancy?,Widzisz coś\nco ci się podoba?,¿Ves algo\nque te guste?,Siehst du etwas\ndas dir gefällt?,Tu vois quelque chose\nqui te plaît?
-PIRATE_BUY_1,Excellent choice!,Doskonały wybór!,¡Excelente elección!,Ausgezeichnete Wahl!,Excellent choix!
-PIRATE_BUY_2,Ye won't regret that!,Nie pożałujesz!,¡No te arrepentirás!,Das wirst du nicht bereuen!,Tu ne regretteras pas!
-PIRATE_BUY_3,A wise investment!,Mądra inwestycja!,¡Una sabia inversión!,Eine kluge Investition!,Un sage investissement!
-PIRATE_BUY_4,Good pick matey!,Dobry wybór kolego!,¡Buena elección!,Gute Wahl Matrose!,Bon choix matelot!
-PIRATE_BUY_5,That'll serve ye well!,To ci dobrze posłuży!,¡Te servirá bien!,Das wird dir gut dienen!,Ça te servira bien!
-PIRATE_BUY_6,Pleasure doin' business!,Przyjemność robić interesy!,¡Un placer hacer negocios!,Freut mich Geschäfte zu machen!,Plaisir de faire affaire!
-POWERUP_BOMB,Bomb,Bomba,Bomba,Bombe,Bombe
-POWERUP_HARPOON,Harpoon,Harpun,Arpón,Harpune,Harpon
-POWERUP_SHUFFLE,Shuffle,Tasowanie,Barajar,Mischen,Mélanger
-POWERUP_EXTRA_LIFE,Extra Life,Dodatkowe Życie,Vida Extra,Extraleben,Vie Supplémentaire
+keys,en,pl,es,de,fr,ja
+MENU_CONTINUE,Continue,Kontynuuj,Continuar,Fortsetzen,Continuer,つづき
+MENU_NEW_GAME,New Game,Nowa Gra,Nuevo Juego,Neues Spiel,Nouvelle Partie,ニューゲーム
+MENU_SHOP,Shop,Sklep,Tienda,Laden,Boutique,ショップ
+MENU_SPIN_THE_WHEEL,Spin the Wheel,Zakręć Kołem,Gira la Ruleta,Glücksrad drehen,Tourner la Roue,ルーレット
+MENU_SETTINGS,Settings,Ustawienia,Ajustes,Einstellungen,Paramètres,設定
+MENU_EXIT,Exit,Wyjście,Salir,Beenden,Quitter,終了
+GAME_LEVEL,Level %d,Poziom %d,Nivel %d,Level %d,Niveau %d,レベル %d
+GAME_SCORE,Score,Wynik,Puntos,Punkte,Score,スコア
+GAME_NEXT,Next,Następny,Siguiente,Nächstes,Suivant,次
+GAME_BEST,Best,Najlepszy,Mejor,Bester,Meilleur,ベスト
+GAME_MENU,Menu,Menu,Menú,Menü,Menu,メニュー
+GAME_GIVE_UP,Give up,Poddaj się,Rendirse,Aufgeben,Abandonner,あきらめる
+GAME_RETRY,Retry,Ponów,Reintentar,Wiederholen,Réessayer,リトライ
+GAME_EXTRA_LIFE,Extra Life! (%d remaining),Dodatkowe Życie! (pozostało %d),¡Vida Extra! (%d restantes),Extraleben! (%d übrig),Vie Supplémentaire! (%d restantes),エクストラライフ！(残り%d)
+GAME_BONUS,Bonus,Bonus,Bonus,Bonus,Bonus,ボーナス
+SHOP_TITLE,Shop,Sklep,Tienda,Laden,Boutique,ショップ
+SHOP_BOMB,Bomb,Bomba,Bomba,Bombe,Bombe,ボム
+SHOP_HARPOON,Harpoon,Harpun,Arpón,Harpune,Harpon,ハープーン
+SHOP_SHUFFLE,Shuffle,Tasowanie,Barajar,Mischen,Mélanger,シャッフル
+SHOP_EXTRA_LIFE,Extra Life,Dodatkowe Życie,Vida Extra,Extraleben,Vie Supplémentaire,エクストラライフ
+SHOP_BUY,Buy,Kup,Comprar,Kaufen,Acheter,購入
+SHOP_BACK,Back,Wróć,Volver,Zurück,Retour,戻る
+SHOP_PURCHASED,Purchased %s!,Kupiono %s!,¡%s comprado!,%s gekauft!,%s acheté!,%sを購入！
+SPIN_TITLE,Spin the Wheel,Zakręć Kołem,Gira la Ruleta,Glücksrad drehen,Tourner la Roue,ルーレット
+SPIN_COST,Cost: %d coins,Koszt: %d monet,Coste: %d monedas,Kosten: %d Münzen,Coût: %d pièces,コスト: %dコイン
+SPIN_BUTTON,Spin!,Kręć!,¡Gira!,Drehen!,Tourner!,回す！
+SPIN_BACK,Back,Wróć,Volver,Zurück,Retour,戻る
+SPIN_NOTHING,Nothing! Better luck next time.,Nic! Może następnym razem.,¡Nada! Mejor suerte la próxima.,Nichts! Vielleicht nächstes Mal.,Rien! Meilleure chance la prochaine fois.,ハズレ！次はきっと当たる。
+SPIN_WON,Won %dx %s!,Wygrano %dx %s!,¡Ganaste %dx %s!,%dx %s gewonnen!,%dx %s gagné!,%s %d個ゲット！
+SETTINGS_TITLE,Settings,Ustawienia,Ajustes,Einstellungen,Paramètres,設定
+SETTINGS_ERASE_PROGRESS,Erase all progress,Wymaż postęp,Borrar todo el progreso,Gesamten Fortschritt löschen,Effacer toute la progression,全データを消去
+SETTINGS_RESET_BUTTON,Reset Game Data,Resetuj Dane Gry,Restablecer Datos,Spieldaten zurücksetzen,Réinitialiser les Données,データリセット
+SETTINGS_CONFIRM,Are you sure?,Jesteś pewien?,¿Estás seguro?,Bist du sicher?,Êtes-vous sûr?,本当にいいですか？
+SETTINGS_CONFIRM_WARNING,This will erase all progress!,To usunie cały postęp!,¡Esto borrará todo el progreso!,Dies löscht den gesamten Fortschritt!,Cela effacera toute la progression!,全ての進行データが消えます！
+SETTINGS_RESET_DONE,Game data has been reset.,Dane gry zostały zresetowane.,Los datos se han restablecido.,Spieldaten wurden zurückgesetzt.,Les données ont été réinitialisées.,ゲームデータをリセットしました。
+SETTINGS_LANGUAGE,Language,Język,Idioma,Sprache,Langue,言語
+PIRATE_GREET_1,Ahoy matey!,Ahoj kolego!,¡Ahoy marinero!,Ahoi Matrose!,Ohé matelot!,よう相棒！
+PIRATE_GREET_2,Welcome aboard!,Witaj na pokładzie!,¡Bienvenido a bordo!,Willkommen an Bord!,Bienvenue à bord!,ようこそ！
+PIRATE_GREET_3,What'll it be today?,Co dziś będzie?,¿Qué será hoy?,Was darf es heute sein?,Que sera-ce aujourd'hui?,今日は何にする？
+PIRATE_GREET_4,Back for more eh?,Wracasz po więcej?,¿Vuelves por más?,Zurück für mehr?,De retour pour plus?,また来たな？
+PIRATE_GREET_5,Step right up!,Podejdź śmiało!,¡Acércate!,Treten Sie näher!,Approchez!,さあいらっしゃい！
+PIRATE_IDLE_1,Take yer time...,Nie spiesz się...,Tómate tu tiempo...,Lass dir Zeit...,Prends ton temps...,ゆっくり選びな...
+PIRATE_IDLE_2,What treasury be ye after?,Jakiego skarbu szukasz?,¿Qué tesoro buscas?,Welchen Schatz suchst du?,Quel trésor cherches-tu?,どのお宝が欲しい？
+PIRATE_IDLE_3,Fine goods fair prices!,Dobre towary uczciwe ceny!,¡Buenos productos buen precio!,Gute Ware faire Preise!,Bons produits prix justes!,良い品お値打ち価格！
+PIRATE_IDLE_4,Don't be shy now.,Nie bądź nieśmiały.,No seas tímido.,Sei nicht schüchtern.,Ne sois pas timide.,遠慮するなよ。
+PIRATE_IDLE_5,I got all day matey.,Mam cały dzień kolego.,Tengo todo el día.,Ich hab den ganzen Tag.,J'ai toute la journée.,急がなくていいぞ。
+PIRATE_IDLE_6,See anything\nye fancy?,Widzisz coś\nco ci się podoba?,¿Ves algo\nque te guste?,Siehst du etwas\ndas dir gefällt?,Tu vois quelque chose\nqui te plaît?,何か\n気になるものは？
+PIRATE_BUY_1,Excellent choice!,Doskonały wybór!,¡Excelente elección!,Ausgezeichnete Wahl!,Excellent choix!,いい選択だ！
+PIRATE_BUY_2,Ye won't regret that!,Nie pożałujesz!,¡No te arrepentirás!,Das wirst du nicht bereuen!,Tu ne regretteras pas!,後悔しないぞ！
+PIRATE_BUY_3,A wise investment!,Mądra inwestycja!,¡Una sabia inversión!,Eine kluge Investition!,Un sage investissement!,賢い投資だ！
+PIRATE_BUY_4,Good pick matey!,Dobry wybór kolego!,¡Buena elección!,Gute Wahl Matrose!,Bon choix matelot!,いいセンスだ！
+PIRATE_BUY_5,That'll serve ye well!,To ci dobrze posłuży!,¡Te servirá bien!,Das wird dir gut dienen!,Ça te servira bien!,役に立つぞ！
+PIRATE_BUY_6,Pleasure doin' business!,Przyjemność robić interesy!,¡Un placer hacer negocios!,Freut mich Geschäfte zu machen!,Plaisir de faire affaire!,毎度あり！
+POWERUP_BOMB,Bomb,Bomba,Bomba,Bombe,Bombe,ボム
+POWERUP_HARPOON,Harpoon,Harpun,Arpón,Harpune,Harpon,ハープーン
+POWERUP_SHUFFLE,Shuffle,Tasowanie,Barajar,Mischen,Mélanger,シャッフル
+POWERUP_EXTRA_LIFE,Extra Life,Dodatkowe Życie,Vida Extra,Extraleben,Vie Supplémentaire,エクストラライフ

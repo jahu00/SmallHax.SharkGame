@@ -39,6 +39,7 @@ func _ready():
 	spin_button.pressed.connect(_on_spin_pressed)
 	back_button.pressed.connect(_on_back_pressed)
 	_update_texts()
+	Settings.apply_font(self)
 	_update_coin_display()
 	_update_spin_affordability()
 	_draw_wheel_segments()

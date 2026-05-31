@@ -7,6 +7,7 @@ var disappear_speed = 0.25
 
 func _ready():
 	bonus_title_label.text = tr("GAME_BONUS")
+	Settings.apply_font(self)
 
 func show_bonus(value):
 	bonus_label.display_value = 0

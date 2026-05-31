@@ -16,6 +16,7 @@ func _ready():
 	spinning_wheel_button.pressed.connect(_on_spinning_wheel_pressed)
 	settings_button.pressed.connect(_on_settings_pressed)
 	_update_texts()
+	Settings.apply_font(self)
 	_update_coin_display()
 
 func _update_texts():

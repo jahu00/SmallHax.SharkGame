@@ -81,6 +81,7 @@ func _ready():
 	back_button.pressed.connect(_on_back_pressed)
 
 	_update_texts()
+	Settings.apply_font(self)
 	update_affordability()
 	update_powerup_counts()
 

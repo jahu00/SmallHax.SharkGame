@@ -13,6 +13,7 @@ func _ready():
 	language_option.item_selected.connect(_on_language_selected)
 	_setup_language_options()
 	_update_texts()
+	Settings.apply_font(self)
 
 func _setup_language_options():
 	language_option.clear()
@@ -30,6 +31,7 @@ func _on_language_selected(index: int):
 	var locale = Settings.SUPPORTED_LOCALES[index]
 	Settings.set_language(locale)
 	_update_texts()
+	Settings.apply_font(self)
 
 func _update_texts():
 	back_button.text = tr("SHOP_BACK")

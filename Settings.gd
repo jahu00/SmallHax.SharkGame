@@ -27,18 +27,42 @@ var extra_life_price = 1000
 var spin_cost = 100
 
 # Localization
-const SUPPORTED_LOCALES: Array[String] = ["en", "pl", "es", "de", "fr"]
+const SUPPORTED_LOCALES: Array[String] = ["en", "pl", "es", "de", "fr", "ja"]
 const LOCALE_NAMES: Dictionary = {
 	"en": "English",
 	"pl": "Polski",
 	"es": "Español",
 	"de": "Deutsch",
 	"fr": "Français",
+	"ja": "日本語",
 }
 const SETTINGS_PATH = "user://settings.json"
 
+signal language_changed
+
+var _font_default: Font = null
+var _font_japanese: Font = null
+
 func _ready():
+	_font_default = load("res://fonts/Ultra/Ultra-Regular.ttf")
+	_font_japanese = load("res://fonts/PottaOne/PottaOne-Regular.ttf")
 	_load_language()
+
+func get_font() -> Font:
+	if TranslationServer.get_locale() == "ja":
+		return _font_japanese
+	return _font_default
+
+func apply_font(node: Node):
+	var font = get_font()
+	_apply_font_recursive(node, font)
+
+func _apply_font_recursive(node: Node, font: Font):
+	if node is Control:
+		if node.has_theme_font_override("font"):
+			node.add_theme_font_override("font", font)
+	for child in node.get_children():
+		_apply_font_recursive(child, font)
 
 func _load_language():
 	if FileAccess.file_exists(SETTINGS_PATH):
@@ -64,6 +88,7 @@ func set_language(locale: String):
 	if locale in SUPPORTED_LOCALES:
 		TranslationServer.set_locale(locale)
 		_save_language()
+		language_changed.emit()
 
 func get_current_locale() -> String:
 	return TranslationServer.get_locale()
