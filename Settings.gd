@@ -30,6 +30,11 @@ var hide_extra_life = true
 # Spinning wheel
 var spin_cost = 100
 
+# Easter egg: pirate singing
+var pirate_sing_idle_time: float = 300.0  # 5 minutes of inactivity
+var pirate_sing_click_count: int = 5     # clicks needed to trigger
+var pirate_sing_click_window: float = 10.0 # seconds window for clicks
+
 # Localization
 const SUPPORTED_LOCALES: Array[String] = ["en", "pl", "es", "de", "fr", "ja"]
 const LOCALE_NAMES: Dictionary = {

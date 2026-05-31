@@ -35,6 +35,7 @@ extends Control
 
 @onready var speach_bubble = find_child("Speach")
 @onready var speach_label = find_child("SpeachLabel")
+@onready var pirate_node = find_child("Pirate")
 
 var _confirmation_timer: float = 0.0
 
@@ -47,6 +48,18 @@ var _confirmation_timer: float = 0.0
 var _pirate_text_timer: float = 0.0
 var _pirate_idle_timer: float = 0.0
 var _pirate_is_speaking: bool = false
+
+# --- Easter egg: pirate singing ---
+var _sing_idle_timer: float = 0.0
+var _sing_click_times: Array[float] = []
+var _singing: bool = false
+var _song_lines: Array[String] = []
+var _song_line_index: int = 0
+var _song_line_timer: float = 0.0
+const SONG_LINE_DURATION: float = 3.0
+const SONG_GAP_DURATION: float = 0.3
+
+var _song_in_gap: bool = false
 
 var _greetings_keys: Array[String] = [
 	"PIRATE_GREET_1",
@@ -91,6 +104,10 @@ func _ready():
 	if Settings.hide_extra_life:
 		extra_life_row.visible = false
 
+	# Make pirate clickable
+	pirate_node.mouse_filter = Control.MOUSE_FILTER_STOP
+	pirate_node.gui_input.connect(_on_pirate_gui_input)
+
 	_update_texts()
 	Settings.apply_font(self)
 	update_affordability()
@@ -119,6 +136,32 @@ func _process(delta):
 		if _confirmation_timer <= 0.0:
 			confirmation_label.text = ""
 
+	# Easter egg: singing sequence
+	if _singing:
+		_song_line_timer -= delta
+		if _song_line_timer <= 0.0:
+			if _song_in_gap:
+				# Gap finished, show next line
+				_song_in_gap = false
+				_pirate_say_raw(_song_lines[_song_line_index])
+				_song_line_timer = SONG_LINE_DURATION
+			else:
+				# Line finished, start gap or end song
+				_song_line_index += 1
+				if _song_line_index < _song_lines.size():
+					speach_bubble.visible = false
+					speach_label.text = ""
+					_song_in_gap = true
+					_song_line_timer = SONG_GAP_DURATION
+				else:
+					_singing = false
+					_song_in_gap = false
+					speach_label.add_theme_font_size_override("font_size", 64)
+					_pirate_clear()
+					_sing_idle_timer = 0.0
+		gold_panel.update_coins()
+		return
+
 	# Pirate text timer
 	if _pirate_text_timer > 0.0:
 		_pirate_text_timer -= delta
@@ -131,9 +174,15 @@ func _process(delta):
 		if _pirate_idle_timer >= pirate_idle_delay:
 			_pirate_say(tr(_idle_lines_keys.pick_random()))
 
+	# Easter egg: inactivity singing trigger
+	_sing_idle_timer += delta
+	if _sing_idle_timer >= Settings.pirate_sing_idle_time:
+		_start_singing()
+
 	gold_panel.update_coins()
 
 func _on_buy_pressed(item_type: String):
+	_sing_idle_timer = 0.0
 	var price = _get_price(item_type)
 	if GameStore.spend_coins(price):
 		GameStore.add_powerup(item_type)
@@ -209,4 +258,43 @@ func _pirate_clear():
 	speach_label.text = ""
 	speach_bubble.visible = false
 	_pirate_is_speaking = false
+	_pirate_idle_timer = 0.0
+
+# --- Easter egg: pirate singing ---
+
+func _on_pirate_gui_input(event: InputEvent):
+	if _singing:
+		return
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		_sing_idle_timer = 0.0
+		var now = Time.get_ticks_msec() / 1000.0
+		_sing_click_times.append(now)
+		# Remove clicks outside the window
+		var window_start = now - Settings.pirate_sing_click_window
+		_sing_click_times = _sing_click_times.filter(func(t): return t >= window_start)
+		if _sing_click_times.size() >= Settings.pirate_sing_click_count:
+			_sing_click_times.clear()
+			_start_singing()
+
+func _start_singing():
+	_singing = true
+	_song_lines = [
+		tr("PIRATE_SONG_1A"),
+		tr("PIRATE_SONG_1B"),
+		tr("PIRATE_SONG_1C"),
+		tr("PIRATE_SONG_1D"),
+		tr("PIRATE_SONG_2A"),
+		tr("PIRATE_SONG_2B"),
+		tr("PIRATE_SONG_2C"),
+		tr("PIRATE_SONG_2D"),
+	]
+	_song_line_index = 0
+	_song_line_timer = SONG_LINE_DURATION
+	speach_label.add_theme_font_size_override("font_size", 48)
+	_pirate_say_raw(_song_lines[0])
+
+func _pirate_say_raw(text: String):
+	speach_label.text = text
+	speach_bubble.visible = true
+	_pirate_is_speaking = true
 	_pirate_idle_timer = 0.0
