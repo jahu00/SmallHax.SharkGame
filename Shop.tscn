@@ -4,6 +4,11 @@
 [ext_resource type="Texture2D" uid="uid://dj3txg7weleny" path="res://assets/ingame.png" id="2_c0ofq"]
 [ext_resource type="Script" uid="uid://cy4a5rggmhghn" path="res://Shop.gd" id="3"]
 [ext_resource type="PackedScene" uid="uid://dg0ldpan3lscn" path="res://GoldPanel.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://dqomnw5rwtlx0" path="res://PowerButton.tscn" id="6_pwrbtn"]
+[ext_resource type="Texture2D" uid="uid://h8sdekf0hqym" path="res://assets/bomb.png" id="7_bomb"]
+[ext_resource type="Texture2D" uid="uid://djgyoagqg2yhs" path="res://assets/harpoon.png" id="8_harpoon"]
+[ext_resource type="Texture2D" uid="uid://bvb1qqgwlnjbl" path="res://assets/shuffle.png" id="9_shuffle"]
+[ext_resource type="Texture2D" uid="uid://cd86spsspu2em" path="res://assets/extra_life.png" id="10_extralife"]
 
 [node name="Shop" type="Control" unique_id=2000992995]
 layout_mode = 3
@@ -14,7 +19,7 @@ script = ExtResource("3")
 layout_mode = 0
 texture = ExtResource("2_c0ofq")
 
-[node name="GoldPanel" parent="." instance=ExtResource("5")]
+[node name="GoldPanel" parent="." unique_id=1379510488 instance=ExtResource("5")]
 layout_mode = 0
 offset_left = 520.0
 offset_top = 20.0
@@ -44,6 +49,12 @@ custom_minimum_size = Vector2(600, 50)
 layout_mode = 2
 theme_override_constants/separation = 12
 
+[node name="BombPowerButton" parent="CenterContainer/VBoxContainer/BombRow" unique_id=1306967200 instance=ExtResource("6_pwrbtn")]
+layout_mode = 2
+icon = ExtResource("7_bomb")
+flat = true
+show_outline = true
+
 [node name="BombNameLabel" type="Label" parent="CenterContainer/VBoxContainer/BombRow" unique_id=299599436]
 custom_minimum_size = Vector2(180, 50)
 layout_mode = 2
@@ -68,6 +79,12 @@ text = "Buy"
 custom_minimum_size = Vector2(600, 50)
 layout_mode = 2
 theme_override_constants/separation = 12
+
+[node name="HarpoonPowerButton" parent="CenterContainer/VBoxContainer/HarpoonRow" unique_id=1792237786 instance=ExtResource("6_pwrbtn")]
+layout_mode = 2
+icon = ExtResource("8_harpoon")
+flat = true
+show_outline = true
 
 [node name="HarpoonNameLabel" type="Label" parent="CenterContainer/VBoxContainer/HarpoonRow" unique_id=948404862]
 custom_minimum_size = Vector2(180, 50)
@@ -94,6 +111,12 @@ custom_minimum_size = Vector2(600, 50)
 layout_mode = 2
 theme_override_constants/separation = 12
 
+[node name="ShufflePowerButton" parent="CenterContainer/VBoxContainer/ShuffleRow" unique_id=84381579 instance=ExtResource("6_pwrbtn")]
+layout_mode = 2
+icon = ExtResource("9_shuffle")
+flat = true
+show_outline = true
+
 [node name="ShuffleNameLabel" type="Label" parent="CenterContainer/VBoxContainer/ShuffleRow" unique_id=113378213]
 custom_minimum_size = Vector2(180, 50)
 layout_mode = 2
@@ -118,6 +141,12 @@ text = "Buy"
 custom_minimum_size = Vector2(600, 50)
 layout_mode = 2
 theme_override_constants/separation = 12
+
+[node name="ExtraLifePowerButton" parent="CenterContainer/VBoxContainer/ExtraLifeRow" unique_id=276583041 instance=ExtResource("6_pwrbtn")]
+layout_mode = 2
+icon = ExtResource("10_extralife")
+flat = true
+show_outline = true
 
 [node name="ExtraLifeNameLabel" type="Label" parent="CenterContainer/VBoxContainer/ExtraLifeRow" unique_id=1050528084]
 custom_minimum_size = Vector2(180, 50)

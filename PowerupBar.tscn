@@ -18,27 +18,20 @@ script = ExtResource("1")
 [node name="BombButton" parent="." unique_id=1396069931 instance=ExtResource("2_uyk3t")]
 layout_mode = 2
 icon = ExtResource("3_uyk3t")
+show_outline = null
 
 [node name="HarpoonButton" parent="." unique_id=131706698 instance=ExtResource("2_uyk3t")]
 layout_mode = 2
 icon = ExtResource("3")
+show_outline = null
 
 [node name="ShuffleButton" parent="." unique_id=1371569606 instance=ExtResource("2_uyk3t")]
 layout_mode = 2
 icon = ExtResource("4")
+show_outline = null
 
 [node name="ExtraLifeButton" parent="." unique_id=1176986101 instance=ExtResource("2_uyk3t")]
 layout_mode = 2
 icon = ExtResource("5")
 flat = true
-
-[node name="ReferenceRect" type="ReferenceRect" parent="ExtraLifeButton" unique_id=1890906268]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-border_color = Color(1, 1, 1, 1)
-border_width = 2.0
-editor_only = false
+show_outline = true

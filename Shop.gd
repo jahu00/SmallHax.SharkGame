@@ -15,6 +15,11 @@ extends Control
 
 @onready var confirmation_label = get_node("CenterContainer/VBoxContainer/ConfirmationLabel")
 
+@onready var bomb_power_button = get_node("CenterContainer/VBoxContainer/BombRow/BombPowerButton")
+@onready var harpoon_power_button = get_node("CenterContainer/VBoxContainer/HarpoonRow/HarpoonPowerButton")
+@onready var shuffle_power_button = get_node("CenterContainer/VBoxContainer/ShuffleRow/ShufflePowerButton")
+@onready var extra_life_power_button = get_node("CenterContainer/VBoxContainer/ExtraLifeRow/ExtraLifePowerButton")
+
 var _confirmation_timer: float = 0.0
 
 func _ready():
@@ -30,6 +35,7 @@ func _ready():
 	back_button.pressed.connect(_on_back_pressed)
 
 	update_affordability()
+	update_powerup_counts()
 
 func _process(delta):
 	if _confirmation_timer > 0.0:
@@ -45,6 +51,7 @@ func _on_buy_pressed(item_type: String):
 		GameStore.add_powerup(item_type)
 		_show_confirmation(item_type)
 		update_affordability()
+		update_powerup_counts()
 
 func _on_back_pressed():
 	Global.change_scene_to_file(Scenes.SceneEnum.Menu)
@@ -73,3 +80,9 @@ func _show_confirmation(item_type: String):
 	var display_name = item_type.replace("_", " ").capitalize()
 	confirmation_label.text = "Purchased " + display_name + "!"
 	_confirmation_timer = 2.0
+
+func update_powerup_counts():
+	bomb_power_button.count = GameStore.inventory["bomb"]
+	harpoon_power_button.count = GameStore.inventory["harpoon"]
+	shuffle_power_button.count = GameStore.inventory["shuffle"]
+	extra_life_power_button.count = GameStore.inventory["extra_life"]

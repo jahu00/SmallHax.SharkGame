@@ -7,6 +7,7 @@ custom_minimum_size = Vector2(72, 72)
 icon_alignment = 1
 expand_icon = true
 script = ExtResource("2_fuaa5")
+show_outline = null
 
 [node name="PowerCount" type="Label" parent="." unique_id=1203737062]
 layout_mode = 1
@@ -35,5 +36,17 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 border_color = Color(0, 1, 0, 1)
+border_width = 2.0
+editor_only = false
+
+[node name="Outline" type="ReferenceRect" parent="." unique_id=62151415]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+border_color = Color(1, 1, 1, 1)
 border_width = 2.0
 editor_only = false
