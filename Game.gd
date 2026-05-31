@@ -259,11 +259,15 @@ func _process(delta):
 		for tile in tiles:
 			var expected_position = Vector2(Settings.tile_width * tile.data.x, Settings.tile_height * tile.data.y)
 			if (tile.position == expected_position):
+				#tile.sprite.flip_h = false
 				continue
 			
 			tiles_moved = true
 			
 			var move_vector = expected_position - tile.position
+			
+			#if (move_vector.x < 0):
+				#tile.sprite.flip_h = true
 			
 			if (abs(move_vector.x) > max_move_distance):
 				tile.position.x += sign(move_vector.x) * max_move_distance
@@ -418,6 +422,10 @@ func execute_bomb(cx: int, cy: int):
 	if bomb_targets.size() == 0:
 		cancel_powerup_targeting()
 		return
+	
+	var tile_count = bomb_targets.size()
+	var points = tile_count * tile_count * Settings.tile_point
+	add_score(points)
 	
 	GameStore.use_powerup("bomb")
 	active_powerup = ""

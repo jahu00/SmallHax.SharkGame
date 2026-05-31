@@ -31,7 +31,10 @@ custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="TitleLabel" type="Label" parent="CenterContainer/VBoxContainer" unique_id=1212322175]
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer/VBoxContainer" unique_id=1839498743]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="CenterContainer/VBoxContainer/PanelContainer" unique_id=1212322175]
 custom_minimum_size = Vector2(500, 60)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2")

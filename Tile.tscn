@@ -145,6 +145,7 @@ modulate = Color(1, 1, 1, 0)
 position = Vector2(32, 32)
 scale = Vector2(0.54, 0.54)
 texture = ExtResource("2_je3b2")
+flip_h = true
 hframes = 6
 vframes = 2
 

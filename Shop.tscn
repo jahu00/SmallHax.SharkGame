@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://djgyoagqg2yhs" path="res://assets/harpoon.png" id="8_harpoon"]
 [ext_resource type="Texture2D" uid="uid://bvb1qqgwlnjbl" path="res://assets/shuffle.png" id="9_shuffle"]
 [ext_resource type="Texture2D" uid="uid://cd86spsspu2em" path="res://assets/extra_life.png" id="10_extralife"]
+[ext_resource type="Texture2D" uid="uid://biak3nkg7ydr0" path="res://assets/coin.png" id="11_coin"]
 
 [node name="Shop" type="Control" unique_id=2000992995]
 layout_mode = 3
@@ -109,12 +110,25 @@ theme_override_fonts/font = ExtResource("2")
 text = "Bomb"
 vertical_alignment = 1
 
-[node name="BombPriceLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/BombRow" unique_id=225641517]
+[node name="BombPriceContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/BombRow"]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="BombPriceLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/BombRow/BombPriceContainer" unique_id=225641517]
+layout_mode = 2
 theme_override_fonts/font = ExtResource("2")
-text = "100 coins"
+text = "100"
 vertical_alignment = 1
+
+[node name="BombCoinIcon" type="TextureRect" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/BombRow/BombPriceContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("11_coin")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="BuyBombButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/BombRow" unique_id=1313419683]
 custom_minimum_size = Vector2(120, 50)
@@ -139,12 +153,25 @@ theme_override_fonts/font = ExtResource("2")
 text = "Harpoon"
 vertical_alignment = 1
 
-[node name="HarpoonPriceLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HarpoonRow" unique_id=1473537387]
+[node name="HarpoonPriceContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HarpoonRow"]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="HarpoonPriceLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HarpoonRow/HarpoonPriceContainer" unique_id=1473537387]
+layout_mode = 2
 theme_override_fonts/font = ExtResource("2")
-text = "250 coins"
+text = "250"
 vertical_alignment = 1
+
+[node name="HarpoonCoinIcon" type="TextureRect" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HarpoonRow/HarpoonPriceContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("11_coin")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="BuyHarpoonButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HarpoonRow" unique_id=177017534]
 custom_minimum_size = Vector2(120, 50)
@@ -169,12 +196,25 @@ theme_override_fonts/font = ExtResource("2")
 text = "Shuffle"
 vertical_alignment = 1
 
-[node name="ShufflePriceLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ShuffleRow" unique_id=77088481]
+[node name="ShufflePriceContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ShuffleRow"]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="ShufflePriceLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ShuffleRow/ShufflePriceContainer" unique_id=77088481]
+layout_mode = 2
 theme_override_fonts/font = ExtResource("2")
-text = "500 coins"
+text = "500"
 vertical_alignment = 1
+
+[node name="ShuffleCoinIcon" type="TextureRect" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ShuffleRow/ShufflePriceContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("11_coin")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="BuyShuffleButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ShuffleRow" unique_id=1853863247]
 custom_minimum_size = Vector2(120, 50)
@@ -199,12 +239,25 @@ theme_override_fonts/font = ExtResource("2")
 text = "Extra Life"
 vertical_alignment = 1
 
-[node name="ExtraLifePriceLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ExtraLifeRow" unique_id=549475863]
+[node name="ExtraLifePriceContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ExtraLifeRow"]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="ExtraLifePriceLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ExtraLifeRow/ExtraLifePriceContainer" unique_id=549475863]
+layout_mode = 2
 theme_override_fonts/font = ExtResource("2")
-text = "1000 coins"
+text = "1000"
 vertical_alignment = 1
+
+[node name="ExtraLifeCoinIcon" type="TextureRect" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ExtraLifeRow/ExtraLifePriceContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("11_coin")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="BuyExtraLifeButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ExtraLifeRow" unique_id=1287761129]
 custom_minimum_size = Vector2(120, 50)

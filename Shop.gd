@@ -62,10 +62,10 @@ var _purchase_lines: Array[String] = [
 ]
 
 func _ready():
-	bomb_price_label.text = str(Settings.bomb_price) + " coins"
-	harpoon_price_label.text = str(Settings.harpoon_price) + " coins"
-	shuffle_price_label.text = str(Settings.shuffle_price) + " coins"
-	extra_life_price_label.text = str(Settings.extra_life_price) + " coins"
+	bomb_price_label.text = str(Settings.bomb_price)
+	harpoon_price_label.text = str(Settings.harpoon_price)
+	shuffle_price_label.text = str(Settings.shuffle_price)
+	extra_life_price_label.text = str(Settings.extra_life_price)
 
 	bomb_button.pressed.connect(_on_buy_pressed.bind("bomb"))
 	harpoon_button.pressed.connect(_on_buy_pressed.bind("harpoon"))
